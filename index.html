@@ -9,151 +9,178 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --brown:#3a2e1f;
-  --gold:#c4a66a;
-  --beige:#f8f5f0;
-  --cream:#f0ece4;
-  --text:#5a4a35;
-  --muted:#8a7560;
+  --yellow:#F6D84A;
+  --orange:#F28C28;
+  --red:#E74C3C;
+  --green:#3CB44B;
+  --blue:#3498DB;
+  --purple:#9B59B6;
+  --text:#2a2a2a;
+  --muted:#666;
+  --light:#f8f9fa;
 }
-body{font-family:'Noto Sans JP',sans-serif;background:var(--beige);color:var(--brown);line-height:1.8;font-size:14px}
-.wrap{max-width:430px;margin:0 auto;background:#fff;min-height:100vh}
+body{font-family:'Noto Sans JP',sans-serif;background:linear-gradient(135deg,#fff9e6,#fff);color:var(--text);line-height:1.8;font-size:14px}
+.wrap{max-width:430px;margin:0 auto;background:#fff;min-height:100vh;overflow:hidden}
 
 /* Header */
-.header{position:sticky;top:0;z-index:100;background:rgba(58,46,31,0.97);backdrop-filter:blur(8px);padding:12px 20px;display:flex;justify-content:space-between;align-items:center}
-.header-logo{font-family:'Zen Maru Gothic',sans-serif;font-size:14px;color:var(--gold);font-weight:700;letter-spacing:2px}
-.header-cta{background:var(--gold);color:var(--brown);font-size:11px;font-weight:700;padding:6px 14px;border-radius:20px;text-decoration:none;letter-spacing:1px}
+.header{position:sticky;top:0;z-index:100;background:linear-gradient(90deg,var(--orange),var(--yellow));backdrop-filter:blur(8px);padding:12px 20px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 10px rgba(0,0,0,0.1)}
+.header-logo{font-family:'Zen Maru Gothic',sans-serif;font-size:14px;color:#fff;font-weight:700;letter-spacing:2px;text-shadow:0 1px 2px rgba(0,0,0,0.2)}
+.header-cta{background:#fff;color:var(--orange);font-size:11px;font-weight:700;padding:6px 14px;border-radius:20px;text-decoration:none;letter-spacing:1px;box-shadow:0 2px 8px rgba(0,0,0,0.15)}
 
 /* Hero */
-.hero{position:relative;background:linear-gradient(165deg,#f5ebe0 0%,#e8d5c0 40%,#d4b896 100%);padding:50px 24px 40px;text-align:center;overflow:hidden}
-.hero::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse at 50% 30%,rgba(196,166,106,0.15) 0%,transparent 60%)}
-.hero-tag{font-size:10px;letter-spacing:5px;color:var(--muted);position:relative;margin-bottom:12px}
-.hero-title{font-family:'Zen Maru Gothic',sans-serif;font-size:24px;font-weight:700;color:var(--brown);line-height:1.6;position:relative;margin-bottom:8px}
-.hero-sub{font-family:'Noto Serif JP',serif;font-size:14px;color:#6b5a45;line-height:2;position:relative}
-.hero-badge{display:inline-flex;align-items:center;gap:6px;margin-top:16px;font-size:11px;padding:6px 16px;border-radius:20px;background:rgba(255,255,255,0.6);border:1px solid rgba(107,76,42,0.15);color:#6b4c2a;position:relative}
+.hero{position:relative;background:linear-gradient(135deg,var(--yellow) 0%,var(--orange) 50%,var(--red) 100%);padding:50px 24px 40px;text-align:center;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle at 30% 70%,rgba(255,255,255,0.3) 0%,transparent 50%)}
+.hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:60px;background:linear-gradient(to top,#fff,transparent)}
+.hero-tag{font-size:10px;letter-spacing:5px;color:rgba(255,255,255,0.9);position:relative;margin-bottom:12px;text-shadow:0 1px 2px rgba(0,0,0,0.2)}
+.hero-title{font-family:'Zen Maru Gothic',sans-serif;font-size:24px;font-weight:700;color:#fff;line-height:1.6;position:relative;margin-bottom:8px;text-shadow:0 2px 4px rgba(0,0,0,0.2)}
+.hero-sub{font-family:'Noto Serif JP',serif;font-size:14px;color:rgba(255,255,255,0.95);line-height:2;position:relative;text-shadow:0 1px 2px rgba(0,0,0,0.2)}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;margin-top:16px;font-size:11px;padding:6px 16px;border-radius:20px;background:rgba(255,255,255,0.9);border:none;color:var(--orange);position:relative;font-weight:600;box-shadow:0 4px 12px rgba(0,0,0,0.15)}
 .hero-stats{display:flex;justify-content:center;gap:24px;margin-top:20px;position:relative}
-.hero-stat{text-align:center}
-.hero-stat-num{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;color:var(--brown);display:block}
-.hero-stat-label{font-size:10px;color:var(--muted);letter-spacing:1px}
+.hero-stat{text-align:center;background:rgba(255,255,255,0.2);padding:12px 16px;border-radius:12px;backdrop-filter:blur(4px)}
+.hero-stat-num{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;color:#fff;display:block;text-shadow:0 1px 2px rgba(0,0,0,0.2)}
+.hero-stat-label{font-size:10px;color:rgba(255,255,255,0.9);letter-spacing:1px}
 
 /* Section */
 .section{padding:40px 24px}
-.section-title{font-family:'Zen Maru Gothic',sans-serif;font-size:18px;font-weight:700;color:var(--brown);text-align:center;margin-bottom:4px}
-.section-sub{font-size:10px;color:var(--gold);text-align:center;letter-spacing:4px;margin-bottom:24px}
+.section-title{font-family:'Zen Maru Gothic',sans-serif;font-size:18px;font-weight:700;color:var(--text);text-align:center;margin-bottom:4px}
+.section-sub{font-size:10px;background:linear-gradient(90deg,var(--orange),var(--red),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-align:center;letter-spacing:4px;margin-bottom:24px;font-weight:600}
 
 /* Concept */
-.concept{background:var(--cream);text-align:center}
+.concept{background:linear-gradient(135deg,#e8f5e9,#fff3e0);text-align:center}
 .concept-text{font-family:'Noto Serif JP',serif;font-size:15px;color:var(--text);line-height:2.2}
 
 /* Doctor */
-.doctor-card{background:linear-gradient(135deg,#faf8f4,#f0ece4);border-radius:16px;padding:24px;border:1px solid rgba(196,166,106,0.2)}
-.doctor-label{font-size:9px;letter-spacing:4px;color:var(--gold);margin-bottom:8px}
-.doctor-name{font-family:'Noto Serif JP',serif;font-size:20px;font-weight:500;color:var(--brown);margin-bottom:4px}
+.doctor-card{background:linear-gradient(135deg,#e3f2fd,#f3e5f5);border-radius:16px;padding:24px;border:2px solid var(--blue);position:relative;overflow:hidden}
+.doctor-card::before{content:'👨‍⚕️';position:absolute;top:10px;right:10px;font-size:40px;opacity:0.15}
+.doctor-label{font-size:9px;letter-spacing:4px;color:var(--blue);margin-bottom:8px;font-weight:600}
+.doctor-name{font-family:'Noto Serif JP',serif;font-size:20px;font-weight:500;color:var(--text);margin-bottom:4px}
 .doctor-title{font-size:12px;color:var(--muted);line-height:1.8;margin-bottom:12px}
-.doctor-books{font-size:11px;color:var(--text)}
-.doctor-note{font-size:11px;color:var(--muted);margin-top:12px;padding-top:12px;border-top:1px solid rgba(196,166,106,0.15)}
+.doctor-books{font-size:11px;color:var(--purple);font-weight:500}
+.doctor-note{font-size:11px;color:var(--muted);margin-top:12px;padding-top:12px;border-top:1px solid var(--blue)}
 
 /* Courses */
-.course-card{background:#fff;border-radius:14px;padding:20px;margin-bottom:12px;border:1px solid rgba(107,76,42,0.1);transition:all 0.3s;cursor:pointer}
-.course-card:hover{border-color:var(--gold);box-shadow:0 4px 20px rgba(196,166,106,0.15)}
-.course-card.featured{border-left:4px solid var(--gold);background:linear-gradient(135deg,#fffcf8,#fff)}
+.course-card{background:#fff;border-radius:14px;padding:20px;margin-bottom:12px;border:2px solid #eee;transition:all 0.3s;cursor:pointer;position:relative;overflow:hidden}
+.course-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:var(--green)}
+.course-card:nth-child(2)::before{background:var(--blue)}
+.course-card:nth-child(3)::before{background:var(--purple)}
+.course-card:nth-child(4)::before{background:var(--orange)}
+.course-card:hover{border-color:var(--green);box-shadow:0 8px 24px rgba(60,180,75,0.2);transform:translateY(-2px)}
+.course-card.featured{border-color:var(--orange);background:linear-gradient(135deg,#fff9e6,#fff)}
+.course-card.featured::before{background:linear-gradient(180deg,var(--yellow),var(--orange),var(--red))}
 .course-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px}
-.course-name{font-family:'Zen Maru Gothic',sans-serif;font-size:16px;font-weight:700;color:var(--brown)}
-.course-price{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;color:#6b4c2a}
+.course-name{font-family:'Zen Maru Gothic',sans-serif;font-size:16px;font-weight:700;color:var(--text)}
+.course-price{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;color:var(--orange)}
 .course-price small{font-size:12px;font-weight:400}
 .course-detail{font-size:12px;color:var(--muted);line-height:1.7}
 .course-includes{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
-.course-include{font-size:10px;padding:3px 10px;border-radius:12px;background:var(--cream);color:var(--text)}
+.course-include{font-size:10px;padding:3px 10px;border-radius:12px;background:linear-gradient(135deg,#e8f5e9,#fff3e0);color:var(--green);font-weight:500}
 
 /* Timeline */
-.timeline{background:var(--cream)}
+.timeline{background:linear-gradient(135deg,#fff3e0,#e8f5e9)}
 .tl-day{margin-bottom:20px}
-.tl-day-label{font-family:'Zen Maru Gothic',sans-serif;font-size:14px;font-weight:700;color:#6b4c2a;margin-bottom:10px;padding-bottom:6px;border-bottom:2px solid rgba(196,166,106,0.3);display:flex;align-items:center;gap:8px}
-.tl-day-label::before{content:'';width:8px;height:8px;background:var(--gold);border-radius:50%}
+.tl-day-label{font-family:'Zen Maru Gothic',sans-serif;font-size:14px;font-weight:700;color:#fff;margin-bottom:10px;padding:8px 14px;border-radius:20px;display:inline-flex;align-items:center;gap:8px;background:linear-gradient(90deg,var(--orange),var(--yellow))}
+.tl-day:last-child .tl-day-label{background:linear-gradient(90deg,var(--green),var(--blue))}
 .tl-item{display:flex;gap:12px;margin-bottom:8px;padding-left:20px;position:relative}
-.tl-item::before{content:'';position:absolute;left:3px;top:8px;width:1px;height:calc(100% + 8px);background:rgba(196,166,106,0.3)}
+.tl-item::before{content:'';position:absolute;left:3px;top:8px;width:2px;height:calc(100% + 8px);background:linear-gradient(180deg,var(--orange),var(--green))}
 .tl-item:last-child::before{display:none}
-.tl-time{font-weight:600;color:var(--gold);min-width:50px;font-size:13px}
+.tl-time{font-weight:600;color:var(--orange);min-width:50px;font-size:13px}
 .tl-content{color:var(--text);font-size:13px}
-.tl-highlight{display:inline-block;background:#fef0e0;padding:2px 8px;border-radius:4px;font-size:11px;color:#c75c2a;font-weight:500;margin-top:4px}
+.tl-highlight{display:inline-block;background:linear-gradient(90deg,var(--green),var(--blue));padding:4px 10px;border-radius:20px;font-size:11px;color:#fff;font-weight:500;margin-top:4px}
 
 /* Options */
 .option-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.option-card{background:#fff;border-radius:12px;padding:16px;text-align:center;border:1px solid rgba(107,76,42,0.08);transition:all 0.3s}
-.option-card:hover{border-color:var(--gold)}
-.option-icon{font-size:28px;margin-bottom:6px}
-.option-name{font-family:'Zen Maru Gothic',sans-serif;font-size:13px;font-weight:500;color:var(--brown);margin-bottom:2px}
-.option-price{font-size:12px;color:var(--gold);font-weight:600}
+.option-card{background:#fff;border-radius:12px;padding:16px;text-align:center;border:2px solid #eee;transition:all 0.3s}
+.option-card:nth-child(1){border-color:rgba(155,89,182,0.3)}
+.option-card:nth-child(2){border-color:rgba(52,152,219,0.3)}
+.option-card:nth-child(3){border-color:rgba(231,76,60,0.3)}
+.option-card:nth-child(4){border-color:rgba(60,180,75,0.3)}
+.option-card:nth-child(5){border-color:rgba(242,140,40,0.3)}
+.option-card:nth-child(6){border-color:rgba(246,216,74,0.5)}
+.option-card:hover{transform:translateY(-4px);box-shadow:0 8px 20px rgba(0,0,0,0.1)}
+.option-icon{font-size:32px;margin-bottom:6px}
+.option-name{font-family:'Zen Maru Gothic',sans-serif;font-size:13px;font-weight:600;color:var(--text);margin-bottom:2px}
+.option-price{font-size:13px;color:var(--orange);font-weight:700}
 .option-desc{font-size:10px;color:var(--muted);margin-top:4px}
 
 /* Features */
 .feature-list{display:flex;flex-direction:column;gap:12px}
-.feature-item{display:flex;gap:14px;align-items:flex-start;background:#fff;border-radius:12px;padding:16px;border:1px solid rgba(107,76,42,0.06)}
-.feature-icon{width:40px;height:40px;background:var(--cream);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.feature-item{display:flex;gap:14px;align-items:flex-start;background:#fff;border-radius:12px;padding:16px;border-left:4px solid var(--green);box-shadow:0 2px 8px rgba(0,0,0,0.05)}
+.feature-item:nth-child(2){border-left-color:var(--blue)}
+.feature-item:nth-child(3){border-left-color:var(--purple)}
+.feature-item:nth-child(4){border-left-color:var(--orange)}
+.feature-icon{width:44px;height:44px;background:linear-gradient(135deg,var(--yellow),var(--orange));border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.feature-item:nth-child(2) .feature-icon{background:linear-gradient(135deg,var(--green),var(--blue))}
+.feature-item:nth-child(3) .feature-icon{background:linear-gradient(135deg,var(--blue),var(--purple))}
+.feature-item:nth-child(4) .feature-icon{background:linear-gradient(135deg,var(--orange),var(--red))}
 .feature-text{font-size:13px;color:var(--text);line-height:1.7}
-.feature-text strong{color:var(--brown)}
+.feature-text strong{color:var(--green)}
+.feature-item:nth-child(2) .feature-text strong{color:var(--blue)}
+.feature-item:nth-child(3) .feature-text strong{color:var(--purple)}
+.feature-item:nth-child(4) .feature-text strong{color:var(--orange)}
 
 /* Access */
-.access-card{background:linear-gradient(135deg,#f5ebe0,#e8d5c0);border-radius:16px;padding:20px}
-.access-title{font-family:'Zen Maru Gothic',sans-serif;font-size:14px;font-weight:700;color:var(--brown);margin-bottom:12px}
-.access-row{display:flex;justify-content:space-between;font-size:12px;color:#6b5a45;padding:8px 0;border-bottom:1px solid rgba(107,76,42,0.1)}
+.access-card{background:linear-gradient(135deg,#e3f2fd,#e8f5e9);border-radius:16px;padding:20px;border:2px solid var(--blue)}
+.access-title{font-family:'Zen Maru Gothic',sans-serif;font-size:14px;font-weight:700;color:var(--blue);margin-bottom:12px}
+.access-row{display:flex;justify-content:space-between;font-size:12px;color:var(--text);padding:8px 0;border-bottom:1px solid rgba(52,152,219,0.2)}
 .access-row:last-child{border-bottom:none}
 
 /* Booking Form */
-.booking{background:var(--brown);color:#e8d5c0;padding:40px 24px}
-.booking .section-title{color:#e8d5c0}
-.booking .section-sub{color:var(--gold)}
-.booking-card{background:rgba(255,255,255,0.08);border-radius:14px;padding:20px;margin-bottom:16px;border:1px solid rgba(196,166,106,0.2)}
-.booking-label{font-size:11px;font-weight:500;color:var(--gold);letter-spacing:1px;margin-bottom:8px;display:block}
-.booking-select,.booking-input{width:100%;padding:12px 14px;border:1px solid rgba(196,166,106,0.3);border-radius:10px;font-size:14px;font-family:'Noto Sans JP',sans-serif;background:rgba(255,255,255,0.06);color:#e8d5c0;margin-bottom:12px;outline:none}
+.booking{background:linear-gradient(135deg,var(--green) 0%,var(--blue) 50%,var(--purple) 100%);color:#fff;padding:40px 24px;position:relative}
+.booking::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")}
+.booking .section-title{color:#fff;position:relative}
+.booking .section-sub{background:linear-gradient(90deg,var(--yellow),#fff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;position:relative}
+.booking-card{background:rgba(255,255,255,0.15);border-radius:14px;padding:20px;margin-bottom:16px;border:1px solid rgba(255,255,255,0.2);backdrop-filter:blur(8px);position:relative}
+.booking-label{font-size:11px;font-weight:600;color:var(--yellow);letter-spacing:1px;margin-bottom:8px;display:block}
+.booking-select,.booking-input{width:100%;padding:12px 14px;border:2px solid rgba(255,255,255,0.3);border-radius:10px;font-size:14px;font-family:'Noto Sans JP',sans-serif;background:rgba(255,255,255,0.1);color:#fff;margin-bottom:12px;outline:none}
 .booking-select{appearance:auto}
-.booking-select option{background:var(--brown);color:#e8d5c0}
-.booking-input::placeholder{color:rgba(232,208,176,0.4)}
-.booking-select:focus,.booking-input:focus{border-color:var(--gold)}
+.booking-select option{background:var(--purple);color:#fff}
+.booking-input::placeholder{color:rgba(255,255,255,0.5)}
+.booking-select:focus,.booking-input:focus{border-color:var(--yellow);background:rgba(255,255,255,0.15)}
 textarea.booking-input{resize:vertical;min-height:80px}
 
 /* Options in booking */
-.booking-options{display:flex;flex-direction:column;gap:10px}
-.booking-opt{display:flex;align-items:center;gap:12px;padding:12px;background:rgba(255,255,255,0.04);border-radius:10px;cursor:pointer;transition:background 0.2s;border:1px solid transparent}
-.booking-opt:hover{background:rgba(255,255,255,0.08)}
-.booking-opt.selected{border-color:var(--gold);background:rgba(196,166,106,0.1)}
+.booking-options{display:flex;flex-direction:column;gap:10px;position:relative}
+.booking-opt{display:flex;align-items:center;gap:12px;padding:12px;background:rgba(255,255,255,0.1);border-radius:10px;cursor:pointer;transition:all 0.2s;border:2px solid transparent}
+.booking-opt:hover{background:rgba(255,255,255,0.15);transform:translateX(4px)}
+.booking-opt.selected{border-color:var(--yellow);background:rgba(246,216,74,0.2)}
 .booking-opt input{display:none}
-.booking-check{width:20px;height:20px;border:2px solid var(--gold);border-radius:5px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.2s}
-.booking-opt.selected .booking-check{background:var(--gold)}
-.booking-opt.selected .booking-check::after{content:'';display:block;width:5px;height:9px;border:solid var(--brown);border-width:0 2px 2px 0;transform:rotate(45deg);margin-top:-2px}
+.booking-check{width:22px;height:22px;border:2px solid var(--yellow);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.2s}
+.booking-opt.selected .booking-check{background:var(--yellow)}
+.booking-opt.selected .booking-check::after{content:'✓';color:var(--green);font-size:14px;font-weight:700}
 .booking-opt-info{flex:1}
-.booking-opt-name{font-size:13px;font-weight:500;color:#e8d5c0}
-.booking-opt-desc{font-size:10px;color:rgba(232,208,176,0.6)}
-.booking-opt-price{font-size:14px;font-weight:700;color:var(--gold)}
+.booking-opt-name{font-size:13px;font-weight:600;color:#fff}
+.booking-opt-desc{font-size:10px;color:rgba(255,255,255,0.7)}
+.booking-opt-price{font-size:14px;font-weight:700;color:var(--yellow)}
 
 /* Summary */
-.booking-summary{background:rgba(196,166,106,0.1);border-radius:14px;padding:20px;margin-bottom:20px;border:1px solid rgba(196,166,106,0.2)}
-.summary-title{font-family:'Zen Maru Gothic',sans-serif;font-size:14px;font-weight:700;color:#e8d5c0;margin-bottom:12px}
-.summary-row{display:flex;justify-content:space-between;font-size:13px;padding:6px 0;border-bottom:1px solid rgba(196,166,106,0.1);color:rgba(232,208,176,0.8)}
+.booking-summary{background:rgba(255,255,255,0.15);border-radius:14px;padding:20px;margin-bottom:20px;border:2px solid var(--yellow);backdrop-filter:blur(8px);position:relative}
+.summary-title{font-family:'Zen Maru Gothic',sans-serif;font-size:14px;font-weight:700;color:var(--yellow);margin-bottom:12px}
+.summary-row{display:flex;justify-content:space-between;font-size:13px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.9)}
 .summary-row:last-child{border-bottom:none}
-.summary-total{display:flex;justify-content:space-between;font-size:18px;font-weight:700;color:#e8d5c0;padding:12px 0 0;border-top:2px solid var(--gold);margin-top:8px}
+.summary-total{display:flex;justify-content:space-between;font-size:20px;font-weight:700;color:#fff;padding:12px 0 0;border-top:2px solid var(--yellow);margin-top:8px}
 
-.booking-cta{display:block;width:100%;background:linear-gradient(135deg,var(--gold),#a88448);color:var(--brown);border:none;padding:16px;border-radius:30px;font-size:15px;font-weight:700;font-family:'Zen Maru Gothic',sans-serif;letter-spacing:2px;cursor:pointer;transition:all 0.3s;text-align:center}
-.booking-cta:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(196,166,106,0.3)}
+.booking-cta{display:block;width:100%;background:linear-gradient(90deg,var(--yellow),var(--orange));color:var(--text);border:none;padding:16px;border-radius:30px;font-size:15px;font-weight:700;font-family:'Zen Maru Gothic',sans-serif;letter-spacing:2px;cursor:pointer;transition:all 0.3s;text-align:center;position:relative;box-shadow:0 4px 15px rgba(246,216,74,0.4)}
+.booking-cta:hover{transform:translateY(-3px);box-shadow:0 8px 25px rgba(246,216,74,0.5)}
 .booking-cta:disabled{opacity:0.5;cursor:not-allowed;transform:none}
 
-.booking-note{text-align:center;font-size:11px;color:rgba(232,208,176,0.6);margin-top:16px;line-height:1.8}
+.booking-note{text-align:center;font-size:11px;color:rgba(255,255,255,0.7);margin-top:16px;line-height:1.8;position:relative}
 
 /* Policy */
-.policy{background:var(--cream)}
-.policy-table{width:100%;border-collapse:collapse;font-size:12px;background:#fff;border-radius:10px;overflow:hidden}
-.policy-table th,.policy-table td{padding:10px 12px;text-align:left;border-bottom:1px solid rgba(107,76,42,0.1)}
-.policy-table th{background:var(--brown);color:#e8d5c0;font-weight:500}
+.policy{background:linear-gradient(135deg,#fff3e0,#fce4ec)}
+.policy-table{width:100%;border-collapse:collapse;font-size:12px;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 4px 12px rgba(0,0,0,0.1)}
+.policy-table th,.policy-table td{padding:12px 14px;text-align:left;border-bottom:1px solid #eee}
+.policy-table th{background:linear-gradient(90deg,var(--red),var(--orange));color:#fff;font-weight:600}
 .policy-table tr:last-child td{border-bottom:none}
+.policy-table tr:hover td{background:#fef9e7}
 
 /* Footer */
-.footer{background:var(--brown);color:rgba(232,208,176,0.6);padding:30px 24px;text-align:center}
-.footer-brand{font-family:'Zen Maru Gothic',sans-serif;font-size:16px;color:var(--gold);margin-bottom:4px}
+.footer{background:linear-gradient(135deg,#2a2a2a,#1a1a1a);color:rgba(255,255,255,0.7);padding:30px 24px;text-align:center}
+.footer-brand{font-family:'Zen Maru Gothic',sans-serif;font-size:18px;background:linear-gradient(90deg,var(--yellow),var(--orange),var(--red));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:6px}
 .footer-info{font-size:11px;margin-bottom:4px}
 .footer-links{display:flex;justify-content:center;gap:16px;margin:16px 0}
-.footer-links a{font-size:11px;color:rgba(232,208,176,0.6);text-decoration:none;transition:color 0.3s}
-.footer-links a:hover{color:var(--gold)}
-.footer-powered{font-size:10px;margin-top:16px;color:rgba(232,208,176,0.4)}
+.footer-links a{font-size:11px;color:rgba(255,255,255,0.6);text-decoration:none;transition:color 0.3s;padding:4px 8px;border-radius:4px}
+.footer-links a:hover{color:var(--yellow);background:rgba(255,255,255,0.1)}
+.footer-powered{font-size:10px;margin-top:16px;color:rgba(255,255,255,0.4)}
 
 /* Form Messages */
 .form-message{padding:12px 16px;border-radius:10px;font-size:13px;margin-bottom:16px;display:none}
