@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ファスティング・ウェルネス事業 ── 要件定義 + ワイヤーフレーム</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@300;400;500&family=Zen+Maru+Gothic:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Noto Sans JP',sans-serif;background:#f5f3ee;color:#1a1a1a;font-size:13px;line-height:1.6}
+
+/* Tab Navigation */
+.tab-nav{position:sticky;top:0;z-index:100;display:flex;background:#1a1a1a;border-bottom:2px solid #c4a66a}
+.tab-btn{flex:1;padding:12px 8px;text-align:center;font-size:12px;font-weight:500;letter-spacing:1px;border:none;background:none;color:#888;cursor:pointer;transition:all 0.3s;font-family:'Noto Sans JP',sans-serif}
+.tab-btn.active{color:#c4a66a;border-bottom:2px solid #c4a66a;margin-bottom:-2px}
+.tab-btn:hover{color:#c4a66a}
+
+.tab-panel{display:none;max-width:430px;margin:0 auto;min-height:100vh}
+.tab-panel.active{display:block}
+
+/* ============================================ */
+/* TAB 1: 要件定義 */
+/* ============================================ */
+.req-page{padding:20px 18px;background:#fff}
+.req-header{text-align:center;padding:20px 0 16px;border-bottom:2px solid #1a1a1a;margin-bottom:16px}
+.req-header h1{font-size:17px;font-weight:700;margin-bottom:4px}
+.req-header p{font-size:11px;color:#888}
+.req-section{margin-bottom:18px}
+.req-section-title{font-size:13px;font-weight:700;background:#3a2e1f;color:#fff;padding:5px 10px;margin-bottom:8px;letter-spacing:1px;border-radius:4px}
+.req-table{width:100%;border-collapse:collapse;font-size:11.5px}
+.req-table th{background:#f0ece4;padding:5px 8px;text-align:left;border:1px solid #ddd;font-weight:500;white-space:nowrap}
+.req-table td{padding:5px 8px;border:1px solid #ddd;vertical-align:top}
+.req-badge{display:inline-block;font-size:9px;font-weight:700;padding:1px 7px;border-radius:8px;margin-right:3px}
+.req-must{background:#ffcdd2;color:#b71c1c}
+.req-want{background:#fff9c4;color:#f57f17}
+.req-future{background:#bbdefb;color:#0d47a1}
+.req-note{background:#f8f8f8;border-radius:6px;padding:10px;font-size:11px;color:#555;margin-top:8px;line-height:1.7}
+.req-flow{display:flex;gap:4px;align-items:center;flex-wrap:wrap;margin:8px 0}
+.req-flow-step{background:#f0ece4;border:1px solid #ddd;border-radius:6px;padding:5px 8px;font-size:10px;text-align:center}
+.req-flow-arrow{color:#c4a66a;font-size:14px}
+
+/* ============================================ */
+/* TAB 2: ワイヤーフレーム（仮サイト） */
+/* ============================================ */
+.site-wrap{background:#f8f5f0;min-height:100vh}
+
+.site-hero{position:relative;background:linear-gradient(165deg,#f5ebe0 0%,#e8d5c0 40%,#d4b896 100%);padding:40px 20px;text-align:center;overflow:hidden}
+.site-hero::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse at 50% 30%,rgba(196,166,106,0.12) 0%,transparent 60%)}
+.site-hero-tag{font-size:9px;letter-spacing:4px;color:#8a7560;position:relative}
+.site-hero-title{font-family:'Zen Maru Gothic',sans-serif;font-size:22px;font-weight:700;color:#3a2e1f;position:relative;margin:8px 0 4px;line-height:1.5}
+.site-hero-sub{font-family:'Noto Serif JP',serif;font-size:13px;color:#6b5a45;position:relative;line-height:1.8}
+.site-hero-badge{display:inline-block;margin-top:12px;font-size:10px;padding:4px 14px;border-radius:20px;border:1px solid rgba(107,76,42,0.2);color:#6b4c2a;position:relative}
+
+/* Concept */
+.site-concept{padding:24px 20px;text-align:center}
+.site-concept-text{font-family:'Noto Serif JP',serif;font-size:14px;color:#5a4a35;line-height:2;font-style:italic}
+.site-divider{width:30px;height:1px;background:#c4a66a;margin:16px auto}
+
+/* Doctor */
+.site-doctor{margin:0 20px 20px;background:#fff;border-radius:14px;padding:18px;border:1px solid rgba(196,166,106,0.15)}
+.site-doctor-label{font-size:9px;letter-spacing:3px;color:#c4a66a;margin-bottom:6px}
+.site-doctor-name{font-family:'Noto Serif JP',serif;font-size:16px;font-weight:500;color:#3a2e1f;margin-bottom:4px}
+.site-doctor-title{font-size:11px;color:#8a7560;line-height:1.6}
+
+/* Program */
+.site-program{padding:0 20px 20px}
+.site-section-title{font-family:'Zen Maru Gothic',sans-serif;font-size:16px;font-weight:700;color:#3a2e1f;text-align:center;margin-bottom:4px}
+.site-section-sub{font-size:10px;color:#a08c74;text-align:center;letter-spacing:3px;margin-bottom:16px}
+
+.site-course{background:#fff;border-radius:14px;padding:16px;margin-bottom:10px;border:1px solid rgba(107,76,42,0.08)}
+.site-course-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.site-course-name{font-family:'Zen Maru Gothic',sans-serif;font-size:14px;font-weight:700;color:#3a2e1f}
+.site-course-price{font-size:16px;font-weight:700;color:#6b4c2a}
+.site-course-detail{font-size:11px;color:#8a7560;line-height:1.7}
+
+/* Timeline */
+.site-timeline{padding:0 20px 20px}
+.tl-day{margin-bottom:14px}
+.tl-day-label{font-family:'Zen Maru Gothic',sans-serif;font-size:13px;font-weight:700;color:#6b4c2a;margin-bottom:6px;padding-bottom:4px;border-bottom:1px solid rgba(196,166,106,0.2)}
+.tl-item{display:flex;gap:10px;margin-bottom:6px;font-size:12px}
+.tl-time{font-weight:500;color:#a08c74;white-space:nowrap;min-width:50px}
+.tl-content{color:#5a4a35}
+.tl-highlight{background:#fef0e0;padding:1px 6px;border-radius:4px;font-size:11px;color:#c75c2a;font-weight:500}
+
+/* Options */
+.site-options{padding:0 20px 20px}
+.site-option-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.site-option{background:#fff;border-radius:10px;padding:12px;text-align:center;border:1px solid rgba(107,76,42,0.08)}
+.site-option-icon{font-size:24px;margin-bottom:4px}
+.site-option-name{font-family:'Zen Maru Gothic',sans-serif;font-size:12px;font-weight:500;color:#3a2e1f;margin-bottom:2px}
+.site-option-price{font-size:11px;color:#a08c74}
+
+/* Features */
+.site-features{padding:0 20px 20px}
+.site-feature-list{display:flex;flex-direction:column;gap:8px}
+.site-feature-item{display:flex;gap:10px;align-items:flex-start;background:#fff;border-radius:10px;padding:12px;border:1px solid rgba(107,76,42,0.06)}
+.site-feature-dot{width:6px;height:6px;border-radius:50%;background:#c4a66a;margin-top:5px;flex-shrink:0}
+.site-feature-text{font-size:12px;color:#5a4a35;line-height:1.6}
+.site-feature-text strong{color:#3a2e1f}
+
+/* Access */
+.site-access{margin:0 20px 20px;background:linear-gradient(135deg,#f5ebe0,#e8d5c0);border-radius:14px;padding:16px}
+.site-access-title{font-family:'Zen Maru Gothic',sans-serif;font-size:13px;font-weight:700;color:#3a2e1f;margin-bottom:8px}
+.site-access-row{display:flex;justify-content:space-between;font-size:11px;color:#6b5a45;padding:4px 0;border-bottom:1px solid rgba(107,76,42,0.08)}
+.site-access-row:last-child{border-bottom:none}
+
+/* ============================================ */
+/* TAB 3: 予約システム */
+/* ============================================ */
+.booking-wrap{background:#f8f5f0;min-height:100vh}
+.booking-header{background:#3a2e1f;color:#e8d5c0;padding:20px;text-align:center}
+.booking-header h2{font-family:'Zen Maru Gothic',sans-serif;font-size:16px;font-weight:700;margin-bottom:4px}
+.booking-header p{font-size:11px;color:#a08c74}
+
+/* Step indicator */
+.booking-steps{display:flex;padding:14px 16px;background:#fff;border-bottom:1px solid #eee}
+.booking-step{flex:1;text-align:center;font-size:10px;color:#ccc;position:relative}
+.booking-step.active{color:#6b4c2a;font-weight:700}
+.booking-step.done{color:#4a9a6a}
+.booking-step-num{display:block;font-size:16px;font-weight:700;margin-bottom:2px}
+
+.booking-form{padding:16px}
+.booking-card{background:#fff;border-radius:12px;padding:16px;margin-bottom:12px;border:1px solid #eee}
+.booking-label{font-size:11px;font-weight:500;color:#6b4c2a;letter-spacing:1px;margin-bottom:6px;display:block}
+.booking-select,.booking-input{width:100%;padding:10px 12px;border:1px solid #ddd;border-radius:8px;font-size:13px;font-family:'Noto Sans JP',sans-serif;background:#faf8f4;color:#3a2e1f;appearance:auto;margin-bottom:10px}
+.booking-select:focus,.booking-input:focus{outline:none;border-color:#c4a66a}
+
+/* Calendar mock */
+.cal-month{font-family:'Zen Maru Gothic',sans-serif;font-size:14px;font-weight:700;text-align:center;margin-bottom:8px;color:#3a2e1f}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;text-align:center;font-size:11px}
+.cal-head{color:#a08c74;font-weight:500;padding:4px 0}
+.cal-day{padding:7px 0;border-radius:6px;cursor:pointer;transition:background 0.2s}
+.cal-day:hover{background:#f0ece4}
+.cal-day.available{background:#e8f5e9;color:#2e7d32;font-weight:500}
+.cal-day.selected{background:#6b4c2a;color:#fff;font-weight:700}
+.cal-day.disabled{color:#ddd}
+.cal-day.today{border:1px solid #c4a66a}
+
+/* Options checkboxes */
+.opt-item{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #f0f0f0}
+.opt-item:last-child{border-bottom:none}
+.opt-check{width:18px;height:18px;border:2px solid #c4a66a;border-radius:4px;flex-shrink:0;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background 0.2s}
+.opt-check.checked{background:#6b4c2a;border-color:#6b4c2a}
+.opt-check.checked::after{content:'';display:block;width:5px;height:9px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg);margin-top:-2px}
+.opt-info{flex:1}
+.opt-name{font-size:12px;font-weight:500;color:#3a2e1f}
+.opt-desc{font-size:10px;color:#a08c74}
+.opt-price{font-size:13px;font-weight:700;color:#6b4c2a;white-space:nowrap}
+
+/* Summary */
+.booking-summary{background:#f0ece4;border-radius:12px;padding:16px;margin:12px 16px}
+.summary-row{display:flex;justify-content:space-between;font-size:12px;padding:4px 0;border-bottom:1px solid rgba(107,76,42,0.08)}
+.summary-row:last-child{border-bottom:none}
+.summary-total{display:flex;justify-content:space-between;font-size:16px;font-weight:700;color:#3a2e1f;padding:8px 0 0;border-top:2px solid #c4a66a;margin-top:4px}
+
+.booking-cta{display:block;width:calc(100% - 32px);margin:12px 16px 20px;background:#6b4c2a;color:#faf6f0;border:none;padding:14px;border-radius:28px;font-size:14px;font-weight:700;font-family:'Zen Maru Gothic',sans-serif;letter-spacing:2px;cursor:pointer;text-align:center;transition:opacity 0.2s}
+.booking-cta:hover{opacity:0.9}
+.booking-note{text-align:center;font-size:10px;color:#a08c74;padding:0 16px 20px}
+
+/* Footer */
+.site-footer{background:#3a2e1f;color:#a08c74;padding:20px;text-align:center;font-size:10px}
+.site-footer-brand{font-family:'Zen Maru Gothic',sans-serif;font-size:14px;color:#e8d5c0;margin-bottom:4px}
+.site-footer-powered{margin-top:8px;font-size:9px;color:#6a5e4a}
+
+@media print{
+  .tab-nav{display:none}
+  .tab-panel{display:block!important;max-width:100%;page-break-after:always}
+  @page{margin:8mm}
+}
+</style>
+</head>
+<body>
+
+<!-- Tab Navigation -->
+<div class="tab-nav">
+  <button class="tab-btn active" onclick="showTab(0)">要件定義</button>
+  <button class="tab-btn" onclick="showTab(1)">仮サイト</button>
+  <button class="tab-btn" onclick="showTab(2)">予約システム</button>
+</div>
+
+<!-- ============================================ -->
+<!-- TAB 1: 要件定義 -->
+<!-- ============================================ -->
+<div class="tab-panel active" id="tab0">
+<div class="req-page">
+
+<div class="req-header">
+  <h1>ファスティング・ウェルネス 要件定義書</h1>
+  <p>danda.net/cafe ── ファスティングセクション ── 2026年5月</p>
+</div>
+
+<!-- 基本要件 -->
+<div class="req-section">
+  <div class="req-section-title">1. 基本情報</div>
+  <table class="req-table">
+    <tr><th>項目</th><th>内容</th></tr>
+    <tr><td>事業名</td><td>滞在型ファスティング・ウェルネス事業</td></tr>
+    <tr><td>主催</td><td>ndanda合同会社</td></tr>
+    <tr><td>実施場所</td><td>四季の宿 天瑞（田村市）+ ndanda合同会社施設</td></tr>
+    <tr><td>宿泊</td><td>天瑞（炭酸泉あり）</td></tr>
+    <tr><td>送迎</td><td>はばタクシー（郡山駅・福島空港対応）</td></tr>
+    <tr><td>医師</td><td>矢作直樹氏（東大名誉教授）── 依頼中</td></tr>
+    <tr><td>定員</td><td>2〜3名（少人数制）</td></tr>
+    <tr><td>対応泊数</td><td>1泊2日〜7泊8日</td></tr>
+    <tr><td>対象</td><td>健康意識の高い個人（県外・海外含む）</td></tr>
+  </table>
+</div>
+
+<!-- 予約フロー -->
+<div class="req-section">
+  <div class="req-section-title">2. 予約フロー</div>
+  <div class="req-flow">
+    <div class="req-flow-step">サイト訪問</div>
+    <div class="req-flow-arrow">→</div>
+    <div class="req-flow-step">コース選択<br><small>泊数・日程</small></div>
+    <div class="req-flow-arrow">→</div>
+    <div class="req-flow-step">オプション<br><small>リンパ等</small></div>
+    <div class="req-flow-arrow">→</div>
+    <div class="req-flow-step">個人情報<br><small>健康状態</small></div>
+    <div class="req-flow-arrow">→</div>
+    <div class="req-flow-step">確認・決済</div>
+    <div class="req-flow-arrow">→</div>
+    <div class="req-flow-step">予約完了<br><small>自動メール</small></div>
+  </div>
+</div>
+
+<!-- 機能要件 -->
+<div class="req-section">
+  <div class="req-section-title">3. 機能要件</div>
+  <table class="req-table">
+    <tr><th>機能</th><th>優先度</th><th>詳細</th></tr>
+    <tr><td>コース選択</td><td><span class="req-badge req-must">必須</span></td><td>1泊〜7泊のコース選択。泊数に応じた料金自動計算</td></tr>
+    <tr><td>カレンダー予約</td><td><span class="req-badge req-must">必須</span></td><td>空き状況の可視化。定員2〜3名の残枠表示</td></tr>
+    <tr><td>オプション選択</td><td><span class="req-badge req-must">必須</span><td>リンパ・音楽療法・アロマ・ヨガ・送迎・観光</td></tr>
+    <tr><td>健康状態入力</td><td><span class="req-badge req-must">必須</span></td><td>アレルギー、既往歴、服薬状況。安全管理用</td></tr>
+    <tr><td>料金自動計算</td><td><span class="req-badge req-must">必須</span></td><td>基本料金＋オプション＋送迎を合算表示</td></tr>
+    <tr><td>オンライン決済</td><td><span class="req-badge req-must">必須</span></td><td>カード・PayPay。予約時に全額 or デポジット</td></tr>
+    <tr><td>予約確認メール</td><td><span class="req-badge req-must">必須</span></td><td>自動送信。持ち物リスト・アクセス案内を添付</td></tr>
+    <tr><td>管理画面</td><td><span class="req-badge req-must">必須</span></td><td>予約一覧・空き管理・売上集計。秀夫さん用ダッシュボード</td></tr>
+    <tr><td>多言語対応</td><td><span class="req-badge req-want">推奨</span></td><td>英語・マレー語。海外客対応</td></tr>
+    <tr><td>キャンセル処理</td><td><span class="req-badge req-must">必須</span></td><td>7日前100%返金、3日前50%、前日以降返金不可</td></tr>
+    <tr><td>リマインド通知</td><td><span class="req-badge req-want">推奨</span></td><td>3日前・前日に自動メール。準備案内</td></tr>
+    <tr><td>レビュー・感想</td><td><span class="req-badge req-future">将来</span></td><td>参加後の感想投稿。次回予約への導線</td></tr>
+    <tr><td>リピート割引</td><td><span class="req-badge req-future">将来</span></td><td>2回目以降の参加者に割引適用</td></tr>
+  </table>
+</div>
+
+<!-- 料金体系 -->
+<div class="req-section">
+  <div class="req-section-title">4. 料金体系（案）</div>
+  <table class="req-table">
+    <tr><th>コース</th><th>基本料金</th><th>含まれるもの</th></tr>
+    <tr><td>1泊2日</td><td>¥49,000〜</td><td>宿泊・炭酸泉・ファスティング液6本・回復食</td></tr>
+    <tr><td>2泊3日</td><td>¥89,000〜</td><td>上記＋ファスティング液追加・ヨガ1回</td></tr>
+    <tr><td>3泊4日</td><td>¥129,000〜</td><td>上記＋トリートメント1回</td></tr>
+    <tr><td>5泊6日</td><td>¥199,000〜</td><td>フルプログラム</td></tr>
+    <tr><td>7泊8日</td><td>¥269,000〜</td><td>プレミアムプログラム</td></tr>
+  </table>
+  <table class="req-table" style="margin-top:8px">
+    <tr><th>オプション</th><th>料金</th></tr>
+    <tr><td>リンパマッサージ（1回60分）</td><td>¥15,000</td></tr>
+    <tr><td>音楽療法（1回）</td><td>¥8,000</td></tr>
+    <tr><td>アロマセラピー（1回）</td><td>¥10,000</td></tr>
+    <tr><td>ヨガ（1回）</td><td>¥5,000</td></tr>
+    <tr><td>郡山駅 送迎（往復）</td><td>¥8,000</td></tr>
+    <tr><td>福島空港 送迎（往復）</td><td>¥12,000</td></tr>
+    <tr><td>田村市 観光案内（半日）</td><td>¥15,000</td></tr>
+  </table>
+</div>
+
+<!-- キャンセルポリシー -->
+<div class="req-section">
+  <div class="req-section-title">5. キャンセルポリシー</div>
+  <table class="req-table">
+    <tr><th>時期</th><th>キャンセル料</th></tr>
+    <tr><td>7日前まで</td><td>無料（全額返金）</td></tr>
+    <tr><td>3〜6日前</td><td>50%</td></tr>
+    <tr><td>前日</td><td>80%</td></tr>
+    <tr><td>当日・無断</td><td>100%（返金不可）</td></tr>
+  </table>
+</div>
+
+<!-- 技術要件 -->
+<div class="req-section">
+  <div class="req-section-title">6. 技術要件</div>
+  <table class="req-table">
+    <tr><th>項目</th><th>仕様</th></tr>
+    <tr><td>ホスティング</td><td>GitHub Pages（静的部分）+ API（予約処理）</td></tr>
+    <tr><td>決済</td><td>Stripe or PayPay API</td></tr>
+    <tr><td>カレンダー</td><td>Google Calendar API連携 or 自前DB</td></tr>
+    <tr><td>メール送信</td><td>SendGrid or Google Apps Script</td></tr>
+    <tr><td>管理画面</td><td>Google Sheets連携 or 専用ダッシュボード</td></tr>
+    <tr><td>フロントエンド</td><td>HTML/CSS/JS（React不要）</td></tr>
+    <tr><td>多言語</td><td>i18n JSON方式（仮サイトと同じ構造）</td></tr>
+  </table>
+</div>
+
+<div class="req-note">
+  <strong>歩合との関係：</strong>本予約システム経由の売上は danda.net/cafe 配下で自動記録。物販歩合率（立ち上げ期12%→安定期10%）が適用される。管理画面で月次売上を自動集計。
+</div>
+
+</div>
+</div>
+
+<!-- ============================================ -->
+<!-- TAB 2: 仮サイト -->
+<!-- ============================================ -->
+<div class="tab-panel" id="tab1">
+<div class="site-wrap">
+
+  <!-- Hero -->
+  <div class="site-hero">
+    <div class="site-hero-tag">FASTING &amp; WELLNESS RETREAT</div>
+    <div class="site-hero-title">食文化に根付く<br>健康と長寿のまち<br>田村市</div>
+    <div class="site-hero-sub">福島の食と自然で、<br>人は本来の姿へ還る</div>
+    <div class="site-hero-badge">滞在型ファスティング・ウェルネス</div>
+  </div>
+
+  <!-- Concept -->
+  <div class="site-concept">
+    <div class="site-concept-text">
+      福島の食が身体を整え、<br>自然が心を整える
+    </div>
+    <div class="site-divider"></div>
+    <div style="font-size:11px;color:#a08c74;line-height:1.8">
+      発酵という日本の食文化と、<br>田村市の静寂な環境を掛け合わせた<br>ここでしかできないウェルネス体験
+    </div>
+  </div>
+
+  <!-- Doctor -->
+  <div class="site-doctor">
+    <div class="site-doctor-label">MEDICAL ADVISOR</div>
+    <div class="site-doctor-name">矢作 直樹</div>
+    <div class="site-doctor-title">医師・医学博士・東京大学名誉教授<br>救急医学・集中医療の専門医<br>著書『人は死なない』『おかげさまで生きる』</div>
+  </div>
+
+  <!-- Courses -->
+  <div class="site-program">
+    <div class="site-section-title">プログラム</div>
+    <div class="site-section-sub">PROGRAMS</div>
+
+    <div class="site-course">
+      <div class="site-course-header">
+        <div class="site-course-name">1泊2日コース</div>
+        <div class="site-course-price">¥49,000〜</div>
+      </div>
+      <div class="site-course-detail">炭酸泉・ファスティング液6本・回復食付き<br>初めての方におすすめ</div>
+    </div>
+
+    <div class="site-course">
+      <div class="site-course-header">
+        <div class="site-course-name">2泊3日コース</div>
+        <div class="site-course-price">¥89,000〜</div>
+      </div>
+      <div class="site-course-detail">ヨガ1回付き。身体の変化を実感する</div>
+    </div>
+
+    <div class="site-course">
+      <div class="site-course-header">
+        <div class="site-course-name">3泊4日コース</div>
+        <div class="site-course-price">¥129,000〜</div>
+      </div>
+      <div class="site-course-detail">トリートメント付き。心身を深く整える</div>
+    </div>
+
+    <div class="site-course" style="border-left:3px solid #c4a66a">
+      <div class="site-course-header">
+        <div class="site-course-name">7泊8日 プレミアム</div>
+        <div class="site-course-price">¥269,000〜</div>
+      </div>
+      <div class="site-course-detail">フルプログラム。人生を変える1週間</div>
+    </div>
+  </div>
+
+  <!-- Timeline -->
+  <div class="site-timeline">
+    <div class="site-section-title">1泊2日の流れ</div>
+    <div class="site-section-sub">SCHEDULE</div>
+
+    <div class="tl-day">
+      <div class="tl-day-label">Day 1</div>
+      <div class="tl-item"><div class="tl-time">12:00</div><div class="tl-content">天瑞 集合・カウンセリング</div></div>
+      <div class="tl-item"><div class="tl-time">13:00</div><div class="tl-content">炭酸泉でゆったり（約2時間）</div></div>
+      <div class="tl-item"><div class="tl-time">15:00</div><div class="tl-content">ndanda施設へ移動</div></div>
+      <div class="tl-item"><div class="tl-time">15:30</div><div class="tl-content">トリートメント・音楽療法</div></div>
+      <div class="tl-item"><div class="tl-time">17:00</div><div class="tl-content">天瑞へ戻り、静かな滞在</div></div>
+      <div class="tl-item"><div class="tl-time"></div><div class="tl-content"><span class="tl-highlight">ファスティング液 3本提供</span></div></div>
+    </div>
+
+    <div class="tl-day">
+      <div class="tl-day-label">Day 2</div>
+      <div class="tl-item"><div class="tl-time">8:00</div><div class="tl-content">ndanda施設でヨガ・呼吸調整</div></div>
+      <div class="tl-item"><div class="tl-time">10:00</div><div class="tl-content">トリートメント</div></div>
+      <div class="tl-item"><div class="tl-time">12:00</div><div class="tl-content">振り返り・解散</div></div>
+      <div class="tl-item"><div class="tl-time"></div><div class="tl-content"><span class="tl-highlight">ファスティング液 3本 + 回復食</span></div></div>
+    </div>
+  </div>
+
+  <!-- Options -->
+  <div class="site-options">
+    <div class="site-section-title">オプション</div>
+    <div class="site-section-sub">OPTIONS</div>
+    <div class="site-option-grid">
+      <div class="site-option"><div class="site-option-icon">&#128134;</div><div class="site-option-name">リンパマッサージ</div><div class="site-option-price">¥15,000/回</div></div>
+      <div class="site-option"><div class="site-option-icon">&#127925;</div><div class="site-option-name">音楽療法</div><div class="site-option-price">¥8,000/回</div></div>
+      <div class="site-option"><div class="site-option-icon">&#127803;</div><div class="site-option-name">アロマセラピー</div><div class="site-option-price">¥10,000/回</div></div>
+      <div class="site-option"><div class="site-option-icon">&#129496;</div><div class="site-option-name">ヨガ</div><div class="site-option-price">¥5,000/回</div></div>
+    </div>
+  </div>
+
+  <!-- Features -->
+  <div class="site-features">
+    <div class="site-section-title">ファスティング液の特徴</div>
+    <div class="site-section-sub">OUR FASTING DRINK</div>
+    <div class="site-feature-list">
+      <div class="site-feature-item"><div class="site-feature-dot"></div><div class="site-feature-text"><strong>10年以上の開発</strong>。自身と参加者の体験を通じ改良を重ねたオリジナルブレンド</div></div>
+      <div class="site-feature-item"><div class="site-feature-dot"></div><div class="site-feature-text"><strong>福島県産米の発酵食</strong>から生まれた麹水、ウコン水、きのこ水を配合</div></div>
+      <div class="site-feature-item"><div class="site-feature-dot"></div><div class="site-feature-text"><strong>屋久島産ウコン4種</strong>。84歳のスミ子おばあちゃんと共同生産</div></div>
+      <div class="site-feature-item"><div class="site-feature-dot"></div><div class="site-feature-text"><strong>1日5〜6回に分けて摂取</strong>。無理のない形で体を支える設計</div></div>
+    </div>
+  </div>
+
+  <!-- Access -->
+  <div class="site-access">
+    <div class="site-access-title">アクセス・送迎</div>
+    <div class="site-access-row"><span>宿泊施設</span><span>四季の宿 天瑞（田村市）</span></div>
+    <div class="site-access-row"><span>郡山駅から</span><span>はばタクシー送迎 約40分</span></div>
+    <div class="site-access-row"><span>福島空港から</span><span>はばタクシー送迎 約30分</span></div>
+    <div class="site-access-row"><span>送迎料金</span><span>郡山¥8,000 / 空港¥12,000</span></div>
+    <div class="site-access-row"><span>定員</span><span>2〜3名（完全少人数制）</span></div>
+  </div>
+
+  <!-- CTA -->
+  <div style="padding:0 20px 20px">
+    <button class="booking-cta" onclick="showTab(2)">空き状況を確認・予約する →</button>
+  </div>
+
+  <!-- Footer -->
+  <div class="site-footer">
+    <div class="site-footer-brand">んだばい ── 滞在型ウェルネス</div>
+    <div>ndanda合同会社 ── 福島県田村市</div>
+    <div class="site-footer-powered">Powered by AIの町医者</div>
+  </div>
+
+</div>
+</div>
+
+<!-- ============================================ -->
+<!-- TAB 3: 予約システム -->
+<!-- ============================================ -->
+<div class="tab-panel" id="tab2">
+<div class="booking-wrap">
+
+  <div class="booking-header">
+    <h2>ファスティング・ウェルネス 予約</h2>
+    <p>四季の宿 天瑞 ── 田村市</p>
+  </div>
+
+  <!-- Steps -->
+  <div class="booking-steps">
+    <div class="booking-step active"><span class="booking-step-num">1</span>コース</div>
+    <div class="booking-step"><span class="booking-step-num">2</span>日程</div>
+    <div class="booking-step"><span class="booking-step-num">3</span>オプション</div>
+    <div class="booking-step"><span class="booking-step-num">4</span>情報</div>
+    <div class="booking-step"><span class="booking-step-num">5</span>確認</div>
+  </div>
+
+  <div class="booking-form">
+
+    <!-- Step 1: Course -->
+    <div class="booking-card">
+      <label class="booking-label">コースを選択</label>
+      <select class="booking-select" id="courseSelect" onchange="updateSummary()">
+        <option value="">選択してください</option>
+        <option value="49000">1泊2日 ── ¥49,000</option>
+        <option value="89000">2泊3日 ── ¥89,000</option>
+        <option value="129000">3泊4日 ── ¥129,000</option>
+        <option value="199000">5泊6日 ── ¥199,000</option>
+        <option value="269000">7泊8日 ── ¥269,000</option>
+      </select>
+
+      <label class="booking-label">参加人数</label>
+      <select class="booking-select" id="guestSelect" onchange="updateSummary()">
+        <option value="1">1名</option>
+        <option value="2">2名</option>
+        <option value="3">3名</option>
+      </select>
+    </div>
+
+    <!-- Step 2: Calendar -->
+    <div class="booking-card">
+      <label class="booking-label">日程を選択</label>
+      <div class="cal-month">2026年 6月</div>
+      <div class="cal-grid">
+        <div class="cal-head">日</div><div class="cal-head">月</div><div class="cal-head">火</div><div class="cal-head">水</div><div class="cal-head">木</div><div class="cal-head">金</div><div class="cal-head">土</div>
+        <div class="cal-day"></div><div class="cal-day disabled">1</div><div class="cal-day disabled">2</div><div class="cal-day disabled">3</div><div class="cal-day available">4</div><div class="cal-day available">5</div><div class="cal-day available">6</div>
+        <div class="cal-day">7</div><div class="cal-day">8</div><div class="cal-day">9</div><div class="cal-day">10</div><div class="cal-day available">11</div><div class="cal-day available">12</div><div class="cal-day available">13</div>
+        <div class="cal-day">14</div><div class="cal-day">15</div><div class="cal-day">16</div><div class="cal-day">17</div><div class="cal-day available selected">18</div><div class="cal-day available">19</div><div class="cal-day available">20</div>
+        <div class="cal-day">21</div><div class="cal-day">22</div><div class="cal-day">23</div><div class="cal-day">24</div><div class="cal-day available">25</div><div class="cal-day available">26</div><div class="cal-day available">27</div>
+        <div class="cal-day">28</div><div class="cal-day">29</div><div class="cal-day">30</div><div class="cal-day"></div><div class="cal-day"></div><div class="cal-day"></div><div class="cal-day"></div>
+      </div>
+      <div style="margin-top:8px;font-size:10px;color:#a08c74;display:flex;gap:12px;justify-content:center">
+        <span><span style="display:inline-block;width:10px;height:10px;background:#e8f5e9;border-radius:2px;vertical-align:middle;margin-right:3px"></span>空きあり</span>
+        <span><span style="display:inline-block;width:10px;height:10px;background:#6b4c2a;border-radius:2px;vertical-align:middle;margin-right:3px"></span>選択中</span>
+      </div>
+    </div>
+
+    <!-- Step 3: Options -->
+    <div class="booking-card">
+      <label class="booking-label">オプションを選択</label>
+
+      <div class="opt-item" onclick="toggleOpt(this)">
+        <div class="opt-check" data-price="15000"></div>
+        <div class="opt-info"><div class="opt-name">リンパマッサージ（60分）</div><div class="opt-desc">先生3名体制・完全個別</div></div>
+        <div class="opt-price">¥15,000</div>
+      </div>
+
+      <div class="opt-item" onclick="toggleOpt(this)">
+        <div class="opt-check" data-price="8000"></div>
+        <div class="opt-info"><div class="opt-name">音楽療法</div><div class="opt-desc">橋本妙子による声楽セッション</div></div>
+        <div class="opt-price">¥8,000</div>
+      </div>
+
+      <div class="opt-item" onclick="toggleOpt(this)">
+        <div class="opt-check" data-price="10000"></div>
+        <div class="opt-info"><div class="opt-name">アロマセラピー</div><div class="opt-desc">天然精油を使用</div></div>
+        <div class="opt-price">¥10,000</div>
+      </div>
+
+      <div class="opt-item" onclick="toggleOpt(this)">
+        <div class="opt-check" data-price="5000"></div>
+        <div class="opt-info"><div class="opt-name">ヨガ（朝）</div><div class="opt-desc">田村市のプロインストラクター</div></div>
+        <div class="opt-price">¥5,000</div>
+      </div>
+
+      <div class="opt-item" onclick="toggleOpt(this)">
+        <div class="opt-check" data-price="8000"></div>
+        <div class="opt-info"><div class="opt-name">郡山駅 送迎（往復）</div><div class="opt-desc">はばタクシー</div></div>
+        <div class="opt-price">¥8,000</div>
+      </div>
+
+      <div class="opt-item" onclick="toggleOpt(this)">
+        <div class="opt-check" data-price="12000"></div>
+        <div class="opt-info"><div class="opt-name">福島空港 送迎（往復）</div><div class="opt-desc">はばタクシー</div></div>
+        <div class="opt-price">¥12,000</div>
+      </div>
+    </div>
+
+    <!-- Step 4: Personal Info -->
+    <div class="booking-card">
+      <label class="booking-label">お名前</label>
+      <input class="booking-input" placeholder="例：山田太郎">
+      <label class="booking-label">メールアドレス</label>
+      <input class="booking-input" type="email" placeholder="example@email.com">
+      <label class="booking-label">電話番号</label>
+      <input class="booking-input" type="tel" placeholder="090-0000-0000">
+      <label class="booking-label">健康状態・アレルギー（任意）</label>
+      <textarea class="booking-input" rows="3" placeholder="服薬中の薬、食物アレルギー、既往歴など..."></textarea>
+    </div>
+
+  </div>
+
+  <!-- Summary -->
+  <div class="booking-summary">
+    <div style="font-family:'Zen Maru Gothic',sans-serif;font-size:13px;font-weight:700;color:#3a2e1f;margin-bottom:8px">ご予約内容</div>
+    <div class="summary-row"><span>コース</span><span id="sumCourse">未選択</span></div>
+    <div class="summary-row"><span>日程</span><span>2026年6月18日〜</span></div>
+    <div class="summary-row"><span>人数</span><span id="sumGuests">1名</span></div>
+    <div class="summary-row"><span>オプション</span><span id="sumOptions">なし</span></div>
+    <div class="summary-total"><span>合計（税込）</span><span id="sumTotal">¥0</span></div>
+  </div>
+
+  <button class="booking-cta">予約を確定する →</button>
+  <div class="booking-note">24時間以内に確認メールをお送りします<br>キャンセルは7日前まで全額返金</div>
+
+  <div class="site-footer">
+    <div class="site-footer-brand">んだばい ── 滞在型ウェルネス</div>
+    <div>ndanda合同会社 ── 福島県田村市</div>
+    <div class="site-footer-powered">Powered by AIの町医者</div>
+  </div>
+
+</div>
+</div>
+
+<script>
+function showTab(i) {
+  document.querySelectorAll('.tab-panel').forEach((p,j) => p.classList.toggle('active', j===i));
+  document.querySelectorAll('.tab-btn').forEach((b,j) => b.classList.toggle('active', j===i));
+}
+
+function toggleOpt(el) {
+  var check = el.querySelector('.opt-check');
+  check.classList.toggle('checked');
+  updateSummary();
+}
+
+function updateSummary() {
+  var sel = document.getElementById('courseSelect');
+  var guests = parseInt(document.getElementById('guestSelect').value) || 1;
+  var coursePrice = parseInt(sel.value) || 0;
+  var courseName = sel.options[sel.selectedIndex].text || '未選択';
+
+  var optTotal = 0;
+  var optNames = [];
+  document.querySelectorAll('.opt-check.checked').forEach(function(c) {
+    optTotal += parseInt(c.getAttribute('data-price'));
+    optNames.push(c.parentElement.querySelector('.opt-name').textContent);
+  });
+
+  var total = (coursePrice * guests) + (optTotal * guests);
+
+  document.getElementById('sumCourse').textContent = coursePrice > 0 ? courseName.split('──')[0].trim() : '未選択';
+  document.getElementById('sumGuests').textContent = guests + '名';
+  document.getElementById('sumOptions').textContent = optNames.length > 0 ? optNames.join('、') : 'なし';
+  document.getElementById('sumTotal').textContent = '¥' + total.toLocaleString();
+}
+</script>
+
+</body>
+</html>
