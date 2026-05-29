@@ -9,7 +9,7 @@
 // ===== CONFIG — ここを必ず編集してください =====
 // 空の場合はコンテナバインドのスプレッドシートを使用します。
 // スタンドアロンの場合はスプレッドシートIDを設定してください。
-var SPREADSHEET_ID = '';
+var SPREADSHEET_ID = '1_uyJhhnlsiBGBnNwzhQ9frIOfQfrDZ3uFpAshp3nkkE';
 var ADMIN_EMAIL    = 'info@ndanda.net';
 var BUSINESS_NAME  = 'んだばい / ndanda合同会社';
 var CALENDAR_ID    = ''; // 空ならデフォルトカレンダー
