@@ -323,6 +323,11 @@ textarea.booking-input { resize: vertical; min-height: 80px; }
 .section-image.facility-image { height: 200px; }
 .program-photo { width: 100%; display: block; height: 150px; object-fit: cover; }
 
+/* ===== Reasons (numbered list) ===== */
+.reasons { counter-reset: r; display: flex; flex-direction: column; gap: 10px; margin-top: 8px; padding: 0; }
+.reasons li { counter-increment: r; list-style: none; position: relative; padding: 13px 16px 13px 50px; background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 12px; font-size: 13px; color: var(--text-primary); line-height: 1.7; }
+.reasons li::before { content: counter(r); position: absolute; left: 12px; top: 12px; width: 26px; height: 26px; border-radius: 50%; background: var(--gold); color: var(--bg-primary); font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 15px; display: flex; align-items: center; justify-content: center; }
+
 /* ===== Print（白基調へ反転） ===== */
 @media print {
   :root {
