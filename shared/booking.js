@@ -5,7 +5,7 @@
 
 // ⬇⬇⬇ デプロイした Google Apps Script のウェブアプリURLをここに貼り付けてください（gas/README.md 参照）
 //      空のままだと「デモモード」で動作し、送信内容は記録されません。
-const GAS_ENDPOINT = '';
+const GAS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxtjuYfInAbZt__Fq1X3RSccwx8KSrTd1OtZ9ppkb--htyN3W8Z1l4Xgu2JTBI68aJ3/exec';
 
 (function () {
   'use strict';
