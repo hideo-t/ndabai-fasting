@@ -1,32 +1,88 @@
 /* =============================================================
    んだばい 滞在型ファスティング・ウェルネス — 共通スタイル
-   和テイスト（茶系・ゴールド）／ スマホファースト 430px
+   ダーク基調 ＋ ゴールド ＋ 差し色（バーガンディ/エメラルド/ロイヤルブルー）
+   スマホファースト 430px
    ============================================================= */
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --primary: #6b4c2a;        /* ダークブラウン */
-  --primary-dark: #523619;
-  --secondary: #c4a66a;      /* ゴールド */
-  --secondary-dark: #a8853f;
-  --accent: #3a2e1f;         /* ディープブラウン */
-  --bg: #f8f5f0;             /* クリーム */
-  --card: #ffffff;
-  --text: #5a4a35;           /* ソフトブラウン */
-  --ink: #3a2e1f;
-  --muted: #8a7a63;
-  --line: #e6ddcd;
-  --cream-tint: #f3ece0;
-  --success: #4a9a6a;        /* グリーン */
-  --alert: #c75c2a;          /* オレンジ */
-  --shadow: rgba(74, 53, 21, 0.08);
+  /* ===== ベース（ダーク＆ウォーム） ===== */
+  --bg-primary: #1a1714;
+  --bg-secondary: #242019;
+  --bg-card: #2a2520;
+  --bg-cream: #f8f5f0;
+  --bg-warm: #f0ece4;
+
+  /* ===== テキスト ===== */
+  --text-primary: #ede8e0;
+  --text-secondary: #a09880;
+  --text-muted: #6a5e4a;
+  --text-dark: #1a1714;
+
+  /* ===== ゴールド（共通アクセント） ===== */
+  --gold: #c4a66a;
+  --gold-light: #d4b896;
+  --gold-dark: #a88448;
+  --gold-glow: rgba(196,166,106,0.08);
+
+  /* ===== バーガンディ（食・身体・発酵 / 田村市） ===== */
+  --burgundy: #8B1A2B;
+  --burgundy-light: #A62639;
+  --burgundy-dark: #6B1420;
+  --burgundy-glow: rgba(139,26,43,0.12);
+  --burgundy-soft: rgba(139,26,43,0.06);
+
+  /* ===== ロイヤルブルー（芸能・知性・国際 / 矢作氏） ===== */
+  --royal-blue: #1E3A6E;
+  --royal-blue-light: #2A4F8F;
+  --royal-blue-dark: #152B52;
+  --royal-blue-glow: rgba(30,58,110,0.12);
+  --royal-blue-soft: rgba(30,58,110,0.06);
+
+  /* ===== エメラルドグリーン（自然・再生 / 葛尾村） ===== */
+  --emerald: #1B6B4A;
+  --emerald-light: #238C5E;
+  --emerald-dark: #145238;
+  --emerald-glow: rgba(27,107,74,0.12);
+  --emerald-soft: rgba(27,107,74,0.06);
+
+  /* ===== ユーティリティ ===== */
+  --border-subtle: rgba(196,166,106,0.12);
+  --border-gold: rgba(196,166,106,0.25);
+  --shadow-card: 0 4px 20px rgba(0,0,0,0.3);
+  --radius-card: 16px;
+  --radius-button: 28px;
+  --radius-tag: 12px;
+
+  /* ===== ページ別アクセント（既定＝ゴールド／トップ用） ===== */
+  --accent: var(--gold);
+  --accent-light: var(--gold-light);
+  --accent-dark: var(--gold-dark);
+  --accent-glow: var(--gold-glow);
+  --accent-soft: rgba(196,166,106,0.06);
+}
+
+/* ページテーマでアクセント切替 */
+body.theme-tamura {
+  --accent: var(--burgundy);
+  --accent-light: var(--burgundy-light);
+  --accent-dark: var(--burgundy-dark);
+  --accent-glow: var(--burgundy-glow);
+  --accent-soft: var(--burgundy-soft);
+}
+body.theme-katsurao {
+  --accent: var(--emerald);
+  --accent-light: var(--emerald-light);
+  --accent-dark: var(--emerald-dark);
+  --accent-glow: var(--emerald-glow);
+  --accent-soft: var(--emerald-soft);
 }
 
 body {
   font-family: 'Noto Serif JP', serif;
-  background: linear-gradient(135deg, #faf7f1, var(--bg));
-  color: var(--text);
+  background: var(--bg-warm);
+  color: var(--text-primary);
   line-height: 1.9;
   font-size: 14px;
   -webkit-font-smoothing: antialiased;
@@ -35,238 +91,252 @@ body {
 .wrap {
   max-width: 430px;
   margin: 0 auto;
-  background: var(--card);
+  background: var(--bg-primary);
   min-height: 100vh;
   overflow: hidden;
 }
 
 @media (min-width: 520px) {
   body { padding: 28px 0; }
-  .wrap { box-shadow: 0 24px 70px rgba(58, 46, 31, 0.16); min-height: auto; }
+  .wrap { box-shadow: 0 24px 70px rgba(0,0,0,0.4); min-height: auto; border-radius: 4px; }
 }
 
 /* ===== Header ===== */
 .header {
   position: sticky; top: 0; z-index: 100;
-  background: linear-gradient(90deg, var(--primary), var(--secondary));
+  background: rgba(26,23,20,0.92);
   backdrop-filter: blur(8px);
-  padding: 12px 20px;
+  padding: 14px 20px;
   display: flex; justify-content: space-between; align-items: center;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid var(--border-subtle);
 }
-.header-logo { font-family: 'Zen Maru Gothic', sans-serif; font-size: 14px; color: #fff; font-weight: 700; letter-spacing: 2px; text-shadow: 0 1px 2px rgba(0,0,0,0.2); }
-.header-cta { background: #fff; color: var(--primary); font-size: 11px; font-weight: 700; padding: 6px 14px; border-radius: 20px; text-decoration: none; letter-spacing: 1px; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+.header-logo { font-family: 'Zen Maru Gothic', sans-serif; font-size: 15px; color: var(--gold); font-weight: 700; letter-spacing: 3px; }
+.header-cta { background: transparent; color: var(--accent-light); font-size: 11px; font-weight: 700; padding: 7px 16px; border-radius: var(--radius-button); text-decoration: none; letter-spacing: 1px; border: 1px solid var(--accent); transition: background 0.2s, color 0.2s; }
+.header-cta:hover { background: var(--accent); color: var(--text-primary); }
 
 /* ===== Breadcrumb ===== */
 .breadcrumb {
   display: flex; flex-wrap: wrap; gap: 6px; align-items: center;
-  padding: 12px 24px; font-size: 11px; color: var(--muted);
-  background: var(--cream-tint); border-bottom: 1px solid var(--line);
+  padding: 12px 24px; font-size: 11px; color: var(--text-muted);
+  background: var(--bg-secondary); border-bottom: 1px solid var(--border-subtle);
   font-family: 'Zen Maru Gothic', sans-serif;
 }
-.breadcrumb a { color: var(--secondary-dark); text-decoration: none; }
-.breadcrumb a:hover { color: var(--primary); text-decoration: underline; }
-.breadcrumb .sep { color: var(--line); }
+.breadcrumb a { color: var(--gold); text-decoration: none; }
+.breadcrumb a:hover { color: var(--gold-light); text-decoration: underline; }
+.breadcrumb .sep { color: var(--text-muted); }
 
 /* ===== Hero ===== */
-.hero {
-  position: relative;
-  background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 60%, var(--accent) 100%);
-  padding: 50px 24px 40px; text-align: center; overflow: hidden;
-}
-.hero::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle at 30% 70%, rgba(255,255,255,0.22) 0%, transparent 50%); }
-.hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 60px; background: linear-gradient(to top, var(--card), transparent); }
-.hero-tag { font-size: 10px; letter-spacing: 5px; color: rgba(255,255,255,0.9); position: relative; margin-bottom: 12px; text-shadow: 0 1px 2px rgba(0,0,0,0.2); }
-.hero-title { font-family: 'Zen Maru Gothic', sans-serif; font-size: 24px; font-weight: 700; color: #fff; line-height: 1.6; position: relative; margin-bottom: 8px; text-shadow: 0 2px 4px rgba(0,0,0,0.25); }
-.hero-sub { font-family: 'Noto Serif JP', serif; font-size: 14px; color: rgba(255,255,255,0.95); line-height: 2; position: relative; text-shadow: 0 1px 2px rgba(0,0,0,0.2); }
-.hero-sub em { font-style: normal; color: #fdeccb; }
-.hero-badge { display: inline-flex; align-items: center; gap: 6px; margin-top: 16px; font-size: 11px; padding: 6px 16px; border-radius: 20px; background: rgba(255,255,255,0.92); border: none; color: var(--primary); position: relative; font-weight: 600; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
-.hero-stats { display: flex; justify-content: center; gap: 20px; margin-top: 20px; position: relative; flex-wrap: wrap; }
-.hero-stat { text-align: center; background: rgba(255,255,255,0.18); padding: 12px 16px; border-radius: 12px; backdrop-filter: blur(4px); }
-.hero-stat-num { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 600; color: #fff; display: block; text-shadow: 0 1px 2px rgba(0,0,0,0.2); }
-.hero-stat-label { font-size: 10px; color: rgba(255,255,255,0.9); letter-spacing: 1px; }
+.hero { position: relative; background: var(--bg-primary); padding: 56px 24px 44px; text-align: center; overflow: hidden; }
+.hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 30%, var(--accent-glow) 0%, transparent 60%); }
+.hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 40px; background: linear-gradient(to top, var(--bg-primary), transparent); }
+.hero-tag { font-size: 9px; letter-spacing: 4px; color: var(--gold); position: relative; margin-bottom: 14px; }
+.hero-title { font-family: 'Zen Maru Gothic', sans-serif; font-size: 25px; font-weight: 700; color: var(--text-primary); line-height: 1.6; position: relative; margin-bottom: 10px; }
+.hero-sub { font-family: 'Noto Serif JP', serif; font-size: 14px; color: var(--text-secondary); line-height: 2; position: relative; }
+.hero-sub em { font-style: normal; color: var(--gold-light); }
+.hero-badge { display: inline-flex; align-items: center; gap: 6px; margin-top: 18px; font-size: 11px; padding: 7px 18px; border-radius: var(--radius-button); background: transparent; border: 1px solid var(--border-gold); color: var(--gold-light); position: relative; font-weight: 600; }
+.hero-stats { display: flex; justify-content: center; gap: 14px; margin-top: 24px; position: relative; flex-wrap: wrap; }
+.hero-stat { text-align: center; background: var(--bg-card); padding: 12px 16px; border-radius: 12px; border: 1px solid var(--border-subtle); }
+.hero-stat-num { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 600; color: var(--gold); display: block; }
+.hero-stat-label { font-size: 10px; color: var(--text-secondary); letter-spacing: 1px; }
 
 /* ===== Section ===== */
-.section { padding: 40px 24px; }
-.section-title { font-family: 'Zen Maru Gothic', sans-serif; font-size: 18px; font-weight: 700; color: var(--ink); text-align: center; margin-bottom: 4px; }
-.section-sub { font-size: 10px; color: var(--secondary-dark); text-align: center; letter-spacing: 4px; margin-bottom: 24px; font-weight: 600; }
+.section { padding: 44px 24px; }
+.section.alt { background: var(--bg-secondary); }
+.section-title { font-family: 'Zen Maru Gothic', sans-serif; font-size: 18px; font-weight: 700; color: var(--text-primary); text-align: center; margin-bottom: 6px; }
+.section-sub { font-size: 10px; color: var(--gold); text-align: center; letter-spacing: 4px; margin-bottom: 8px; font-weight: 600; }
+.section-title + .section-sub { margin-bottom: 24px; }
+/* ゴールドのセパレーター */
+.gold-divider { width: 40px; height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); margin: 18px auto 24px; }
 
 /* ===== Concept ===== */
-.concept { background: linear-gradient(135deg, var(--cream-tint), #faf5ec); text-align: center; }
-.concept-text { font-family: 'Noto Serif JP', serif; font-size: 15px; color: var(--ink); line-height: 2.2; }
+.concept { background: var(--bg-secondary); text-align: center; }
+.concept-text { font-family: 'Noto Serif JP', serif; font-size: 15px; color: var(--text-primary); line-height: 2.2; }
 
-/* ===== Lead text block (common content) ===== */
-.lead { font-family: 'Noto Serif JP', serif; font-size: 14px; color: var(--text); line-height: 2; }
+/* ===== Lead text ===== */
+.lead { font-family: 'Noto Serif JP', serif; font-size: 14px; color: var(--text-secondary); line-height: 2; }
 .lead p { margin-bottom: 14px; }
 .lead p:last-child { margin-bottom: 0; }
-.lead strong { color: var(--primary); font-weight: 600; }
+.lead strong { color: var(--gold-light); font-weight: 600; }
 
-/* ===== Doctor / Advisor ===== */
-.doctor-card { background: linear-gradient(135deg, #fbf6ec, #f6efe1); border-radius: 16px; padding: 24px; border: 2px solid var(--secondary); position: relative; overflow: hidden; }
-.doctor-card::before { content: '👨‍⚕️'; position: absolute; top: 10px; right: 10px; font-size: 40px; opacity: 0.15; }
-.doctor-label { font-size: 9px; letter-spacing: 4px; color: var(--secondary-dark); margin-bottom: 8px; font-weight: 600; }
-.doctor-name { font-family: 'Noto Serif JP', serif; font-size: 20px; font-weight: 500; color: var(--ink); margin-bottom: 4px; }
-.doctor-title { font-size: 12px; color: var(--muted); line-height: 1.8; margin-bottom: 12px; }
-.doctor-books { font-size: 11px; color: var(--primary); font-weight: 500; }
-.doctor-note { font-size: 11px; color: var(--muted); margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--secondary); }
+/* ===== Doctor / Advisor（常時ロイヤルブルー） ===== */
+.doctor-card { background: var(--royal-blue-soft); border: 1px solid rgba(30,58,110,0.30); border-radius: var(--radius-card); padding: 24px; position: relative; overflow: hidden; }
+.doctor-card::before { content: '👨‍⚕️'; position: absolute; top: 10px; right: 12px; font-size: 40px; opacity: 0.12; }
+.doctor-label { font-size: 9px; letter-spacing: 3px; color: var(--royal-blue-light); margin-bottom: 8px; font-weight: 700; }
+.doctor-name { font-family: 'Noto Serif JP', serif; font-size: 20px; font-weight: 500; color: var(--text-primary); margin-bottom: 4px; }
+.doctor-title { font-size: 12px; color: var(--text-secondary); line-height: 1.8; margin-bottom: 12px; }
+.doctor-books { font-size: 11px; color: var(--royal-blue-light); font-weight: 500; }
+.doctor-note { font-size: 11px; color: var(--text-muted); margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(30,58,110,0.30); }
 
-/* ===== Programs list (top page cards) ===== */
+/* ===== Programs list (top page) ===== */
 .programs-list { display: flex; flex-direction: column; gap: 16px; }
-.program-card {
-  display: block; text-decoration: none; color: inherit;
-  background: var(--card); border: 1px solid var(--line); border-radius: 16px; overflow: hidden;
-  box-shadow: 0 6px 20px var(--shadow); transition: transform 0.25s, box-shadow 0.25s;
-}
-.program-card:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(58,46,31,0.16); }
-.program-card-head { background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%); color: #fff; padding: 20px; }
-.program-card-tag { font-size: 10px; letter-spacing: 3px; opacity: 0.9; }
-.program-card-title { font-family: 'Zen Maru Gothic', sans-serif; font-size: 18px; font-weight: 700; margin-top: 4px; text-shadow: 0 1px 2px rgba(0,0,0,0.2); }
+.program-card { display: block; text-decoration: none; color: inherit; background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-card); overflow: hidden; box-shadow: var(--shadow-card); transition: border-color 0.3s, box-shadow 0.3s, transform 0.25s; }
+.program-card:hover { transform: translateY(-3px); border-color: var(--border-gold); box-shadow: 0 12px 32px rgba(0,0,0,0.45); }
+.program-card.tamura { border-left: 3px solid var(--burgundy); }
+.program-card.katsurao { border-left: 3px solid var(--emerald); }
+.program-card-head { padding: 20px; border-bottom: 1px solid var(--border-subtle); }
+.program-card.tamura .program-card-head { background: var(--burgundy-soft); }
+.program-card.katsurao .program-card-head { background: var(--emerald-soft); }
+.program-card-tag { font-size: 10px; letter-spacing: 3px; color: var(--gold); }
+.program-card-title { font-family: 'Zen Maru Gothic', sans-serif; font-size: 18px; font-weight: 700; margin-top: 4px; color: var(--text-primary); }
 .program-card-body { padding: 18px 20px; }
 .program-card-features { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
-.program-card-feature { font-size: 10px; padding: 3px 10px; border-radius: 12px; background: var(--cream-tint); color: var(--secondary-dark); font-weight: 600; }
-.program-card-desc { font-size: 13px; color: var(--text); line-height: 1.8; }
-.program-card-link { display: inline-flex; align-items: center; gap: 6px; margin-top: 12px; font-family: 'Zen Maru Gothic', sans-serif; font-size: 13px; font-weight: 700; color: var(--primary); }
-.program-card.soon { opacity: 0.65; pointer-events: none; }
-.program-card.soon .program-card-head { background: linear-gradient(135deg, #cfc4b0, #b3a589); }
+.program-card-feature { font-size: 10px; padding: 3px 10px; border-radius: var(--radius-tag); background: var(--bg-secondary); color: var(--gold); font-weight: 600; border: 1px solid var(--border-subtle); }
+.program-card-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.8; }
+.program-card.tamura .program-card-link { color: var(--burgundy-light); }
+.program-card.katsurao .program-card-link { color: var(--emerald-light); }
+.program-card-link { display: inline-flex; align-items: center; gap: 6px; margin-top: 12px; font-family: 'Zen Maru Gothic', sans-serif; font-size: 13px; font-weight: 700; color: var(--gold); }
 
 /* ===== Courses ===== */
-.course-card { background: var(--card); border-radius: 14px; padding: 20px; margin-bottom: 12px; border: 2px solid var(--line); transition: all 0.3s; position: relative; overflow: hidden; }
-.course-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--secondary); }
-.course-card:hover { border-color: var(--secondary); box-shadow: 0 8px 24px rgba(168,133,63,0.18); transform: translateY(-2px); }
-.course-card.featured { border-color: var(--primary); background: linear-gradient(135deg, #fbf4e6, var(--card)); }
-.course-card.featured::before { background: linear-gradient(180deg, var(--secondary), var(--primary)); }
-.course-ribbon { position: absolute; top: 14px; right: 0; background: var(--primary); color: #fff; font-size: 10px; font-weight: 700; letter-spacing: 1px; padding: 3px 12px; border-radius: 14px 0 0 14px; font-family: 'Zen Maru Gothic', sans-serif; }
+.course-card { background: var(--bg-card); border-radius: var(--radius-card); padding: 20px; margin-bottom: 12px; border: 1px solid var(--border-subtle); transition: all 0.3s; position: relative; overflow: hidden; }
+.course-card::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%; background: var(--accent); }
+.course-card:hover { border-color: var(--border-gold); box-shadow: var(--shadow-card); transform: translateY(-2px); }
+.course-card.featured { border-color: var(--border-gold); background: linear-gradient(135deg, var(--accent-soft), var(--bg-card)); }
+.course-card.featured::before { background: linear-gradient(180deg, var(--gold), var(--accent)); }
+.course-ribbon { position: absolute; top: 14px; right: 0; background: var(--accent); color: var(--text-primary); font-size: 10px; font-weight: 700; letter-spacing: 1px; padding: 3px 12px; border-radius: var(--radius-tag) 0 0 var(--radius-tag); font-family: 'Zen Maru Gothic', sans-serif; }
 .course-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; gap: 10px; }
-.course-name { font-family: 'Zen Maru Gothic', sans-serif; font-size: 16px; font-weight: 700; color: var(--ink); }
-.course-price { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 600; color: var(--secondary-dark); white-space: nowrap; }
+.course-name { font-family: 'Zen Maru Gothic', sans-serif; font-size: 16px; font-weight: 700; color: var(--text-primary); }
+.course-price { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 600; color: var(--accent-light); white-space: nowrap; }
 .course-price small { font-size: 12px; font-weight: 400; }
-.course-detail { font-size: 12px; color: var(--muted); line-height: 1.7; }
+.course-detail { font-size: 12px; color: var(--text-secondary); line-height: 1.7; }
 .course-includes { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
-.course-include { font-size: 10px; padding: 3px 10px; border-radius: 12px; background: var(--cream-tint); color: var(--secondary-dark); font-weight: 500; }
+.course-include { font-size: 10px; padding: 3px 10px; border-radius: var(--radius-tag); background: var(--bg-secondary); color: var(--gold); font-weight: 500; border: 1px solid var(--border-subtle); }
 
 /* ===== Timeline ===== */
-.timeline { background: linear-gradient(135deg, var(--cream-tint), #faf5ec); }
+.timeline { background: var(--bg-secondary); }
 .tl-day { margin-bottom: 20px; }
-.tl-day-label { font-family: 'Zen Maru Gothic', sans-serif; font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 10px; padding: 8px 14px; border-radius: 20px; display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(90deg, var(--primary), var(--secondary)); }
-.tl-day:last-child .tl-day-label { background: linear-gradient(90deg, var(--secondary-dark), var(--secondary)); }
+.tl-day-label { font-family: 'Zen Maru Gothic', sans-serif; font-size: 14px; font-weight: 700; color: var(--text-primary); margin-bottom: 10px; padding: 8px 14px; border-radius: var(--radius-button); display: inline-flex; align-items: center; gap: 8px; background: var(--accent); }
+.tl-day:last-child .tl-day-label { background: var(--accent-dark); }
 .tl-item { display: flex; gap: 12px; margin-bottom: 8px; padding-left: 20px; position: relative; }
-.tl-item::before { content: ''; position: absolute; left: 3px; top: 8px; width: 2px; height: calc(100% + 8px); background: linear-gradient(180deg, var(--primary), var(--secondary)); }
+.tl-item::before { content: ''; position: absolute; left: 3px; top: 8px; width: 2px; height: calc(100% + 8px); background: var(--gold); opacity: 0.5; }
 .tl-item:last-child::before { display: none; }
-.tl-time { font-weight: 600; color: var(--secondary-dark); min-width: 50px; font-size: 13px; }
-.tl-content { color: var(--ink); font-size: 13px; }
-.tl-highlight { display: inline-block; background: linear-gradient(90deg, var(--primary), var(--secondary)); padding: 4px 10px; border-radius: 20px; font-size: 11px; color: #fff; font-weight: 500; margin-top: 4px; }
+.tl-time { font-weight: 600; color: var(--accent-light); min-width: 50px; font-size: 13px; }
+.tl-content { color: var(--text-primary); font-size: 13px; }
+.tl-highlight { display: inline-block; background: var(--accent); padding: 4px 10px; border-radius: var(--radius-button); font-size: 11px; color: var(--text-primary); font-weight: 500; margin-top: 4px; }
 
 /* ===== Options ===== */
 .option-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-.option-card { background: var(--card); border-radius: 12px; padding: 16px; text-align: center; border: 2px solid var(--line); transition: all 0.3s; }
-.option-card:hover { transform: translateY(-4px); box-shadow: 0 8px 20px rgba(58,46,31,0.1); border-color: var(--secondary); }
+.option-card { background: var(--bg-card); border-radius: var(--radius-card); padding: 16px; text-align: center; border: 1px solid var(--border-gold); transition: all 0.3s; }
+.option-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-card); border-color: var(--gold); }
 .option-icon { font-size: 32px; margin-bottom: 6px; }
-.option-name { font-family: 'Zen Maru Gothic', sans-serif; font-size: 13px; font-weight: 600; color: var(--ink); margin-bottom: 2px; }
-.option-price { font-size: 13px; color: var(--secondary-dark); font-weight: 700; }
-.option-desc { font-size: 10px; color: var(--muted); margin-top: 4px; }
+.option-name { font-family: 'Zen Maru Gothic', sans-serif; font-size: 13px; font-weight: 600; color: var(--text-primary); margin-bottom: 2px; }
+.option-price { font-size: 13px; color: var(--gold); font-weight: 700; }
+.option-desc { font-size: 10px; color: var(--text-muted); margin-top: 4px; }
 
 /* ===== Features ===== */
 .feature-list { display: flex; flex-direction: column; gap: 12px; }
-.feature-item { display: flex; gap: 14px; align-items: flex-start; background: var(--card); border-radius: 12px; padding: 16px; border-left: 4px solid var(--secondary); box-shadow: 0 2px 8px var(--shadow); }
-.feature-icon { width: 44px; height: 44px; background: linear-gradient(135deg, var(--secondary), var(--primary)); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
-.feature-text { font-size: 13px; color: var(--ink); line-height: 1.7; }
-.feature-text strong { color: var(--primary); }
+.feature-item { display: flex; gap: 14px; align-items: flex-start; background: var(--bg-card); border-radius: var(--radius-card); padding: 16px; border-left: 3px solid var(--accent); box-shadow: var(--shadow-card); }
+.feature-icon { width: 44px; height: 44px; background: var(--accent-soft); border: 1px solid var(--border-subtle); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
+.feature-text { font-size: 13px; color: var(--text-secondary); line-height: 1.7; }
+.feature-text strong { color: var(--gold-light); }
 
 /* ===== Access ===== */
-.access-card { background: linear-gradient(135deg, #fbf6ec, var(--cream-tint)); border-radius: 16px; padding: 20px; border: 2px solid var(--secondary); }
-.access-title { font-family: 'Zen Maru Gothic', sans-serif; font-size: 14px; font-weight: 700; color: var(--primary); margin-bottom: 12px; }
-.access-row { display: flex; justify-content: space-between; font-size: 12px; color: var(--ink); padding: 8px 0; border-bottom: 1px solid rgba(196,166,106,0.3); gap: 12px; }
+.access-card { background: var(--bg-card); border-radius: var(--radius-card); padding: 20px; border: 1px solid var(--border-gold); }
+.access-title { font-family: 'Zen Maru Gothic', sans-serif; font-size: 14px; font-weight: 700; color: var(--gold); margin-bottom: 12px; }
+.access-row { display: flex; justify-content: space-between; font-size: 12px; color: var(--text-primary); padding: 8px 0; border-bottom: 1px solid var(--border-subtle); gap: 12px; }
 .access-row:last-child { border-bottom: none; }
+.access-row span:first-child { color: var(--text-secondary); }
 
 /* ===== FAQ ===== */
 .faq-list { display: flex; flex-direction: column; gap: 10px; }
-.faq-item { background: var(--card); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
-.faq-q { font-family: 'Zen Maru Gothic', sans-serif; font-size: 13px; font-weight: 700; color: var(--primary); padding: 14px 16px; cursor: pointer; display: flex; justify-content: space-between; gap: 10px; list-style: none; }
+.faq-item { background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-card); overflow: hidden; }
+.faq-q { font-family: 'Zen Maru Gothic', sans-serif; font-size: 13px; font-weight: 700; color: var(--text-primary); padding: 14px 16px; cursor: pointer; display: flex; justify-content: space-between; gap: 10px; list-style: none; }
 .faq-q::-webkit-details-marker { display: none; }
-.faq-q::after { content: '＋'; color: var(--secondary-dark); font-weight: 700; transition: transform 0.2s; }
+.faq-q::after { content: '＋'; color: var(--gold); font-weight: 700; }
 .faq-item[open] .faq-q::after { content: '−'; }
-.faq-a { padding: 0 16px 16px; font-size: 13px; color: var(--text); line-height: 1.9; }
+.faq-a { padding: 0 16px 16px; font-size: 13px; color: var(--text-secondary); line-height: 1.9; }
 
 /* ===== Booking Form ===== */
-.booking { background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%); color: #fff; padding: 40px 24px; position: relative; }
-.booking::before { content: ''; position: absolute; inset: 0; background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); }
-.booking .section-title { color: #fff; position: relative; }
-.booking .section-sub { color: var(--secondary); position: relative; }
-.booking-card { background: rgba(255,255,255,0.12); border-radius: 14px; padding: 20px; margin-bottom: 16px; border: 1px solid rgba(255,255,255,0.2); backdrop-filter: blur(8px); position: relative; }
-.booking-label { display: block; font-family: 'Zen Maru Gothic', sans-serif; font-size: 11px; font-weight: 600; color: var(--secondary); letter-spacing: 1px; margin-bottom: 8px; }
-.booking-select, .booking-input { width: 100%; padding: 12px 14px; border: 2px solid rgba(255,255,255,0.3); border-radius: 10px; font-size: 14px; font-family: 'Zen Maru Gothic', sans-serif; background: rgba(255,255,255,0.12); color: #fff; margin-bottom: 12px; outline: none; transition: border-color 0.2s, background 0.2s; }
+.booking { background: var(--bg-secondary); color: var(--text-primary); padding: 44px 24px; position: relative; }
+.booking .section-title { color: var(--text-primary); }
+.booking .section-sub { color: var(--gold); }
+.booking-card { background: var(--bg-card); border-radius: var(--radius-card); padding: 20px; margin-bottom: 16px; border: 1px solid var(--border-subtle); }
+.booking-label { display: block; font-family: 'Zen Maru Gothic', sans-serif; font-size: 11px; font-weight: 600; color: var(--gold); letter-spacing: 1px; margin-bottom: 8px; }
+.booking-select, .booking-input { width: 100%; padding: 12px 14px; border: 1px solid var(--border-subtle); border-radius: 10px; font-size: 14px; font-family: 'Zen Maru Gothic', sans-serif; background: var(--bg-secondary); color: var(--text-primary); margin-bottom: 12px; outline: none; transition: border-color 0.2s, box-shadow 0.2s; }
 .booking-select { appearance: auto; }
-.booking-select option { background: var(--accent); color: #fff; }
-.booking-input::placeholder { color: rgba(255,255,255,0.5); }
-.booking-select:focus, .booking-input:focus { border-color: var(--secondary); background: rgba(255,255,255,0.18); }
+.booking-select option { background: var(--bg-card); color: var(--text-primary); }
+.booking-input::placeholder { color: var(--text-muted); }
+.booking-select:focus, .booking-input:focus { border-color: var(--gold); box-shadow: 0 0 0 3px var(--gold-glow); }
 textarea.booking-input { resize: vertical; min-height: 80px; }
 
-.booking-options { display: flex; flex-direction: column; gap: 10px; position: relative; }
-.booking-opt { display: flex; align-items: center; gap: 12px; padding: 12px; background: rgba(255,255,255,0.1); border-radius: 10px; cursor: pointer; transition: all 0.2s; border: 2px solid transparent; }
-.booking-opt:hover { background: rgba(255,255,255,0.16); transform: translateX(4px); }
-.booking-opt:has(input:checked) { border-color: var(--secondary); background: rgba(196,166,106,0.22); }
-.booking-opt:has(input:focus-visible) { outline: 2px solid #fff; outline-offset: 2px; }
+.booking-options { display: flex; flex-direction: column; gap: 10px; }
+.booking-opt { display: flex; align-items: center; gap: 12px; padding: 12px; background: var(--bg-secondary); border-radius: 10px; cursor: pointer; transition: all 0.2s; border: 1px solid var(--border-subtle); }
+.booking-opt:hover { border-color: var(--border-gold); }
+.booking-opt:has(input:checked) { border-color: var(--gold); background: var(--gold-glow); }
+.booking-opt:has(input:focus-visible) { outline: 2px solid var(--gold); outline-offset: 2px; }
 .booking-opt input { position: absolute; width: 1px; height: 1px; opacity: 0; margin: 0; }
-.booking-check { width: 22px; height: 22px; border: 2px solid var(--secondary); border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.2s; }
-.booking-opt:has(input:checked) .booking-check { background: var(--secondary); }
-.booking-opt:has(input:checked) .booking-check::after { content: '✓'; color: var(--accent); font-size: 14px; font-weight: 700; }
+.booking-check { width: 22px; height: 22px; border: 2px solid var(--gold); border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.2s; }
+.booking-opt:has(input:checked) .booking-check { background: var(--gold); }
+.booking-opt:has(input:checked) .booking-check::after { content: '✓'; color: var(--bg-primary); font-size: 14px; font-weight: 700; }
 .booking-opt-info { flex: 1; }
-.booking-opt-name { font-size: 13px; font-weight: 600; color: #fff; }
-.booking-opt-desc { font-size: 10px; color: rgba(255,255,255,0.7); }
-.booking-opt-price { font-size: 14px; font-weight: 700; color: var(--secondary); }
+.booking-opt-name { font-size: 13px; font-weight: 600; color: var(--text-primary); }
+.booking-opt-desc { font-size: 10px; color: var(--text-muted); }
+.booking-opt-price { font-size: 14px; font-weight: 700; color: var(--gold); }
 
-.booking-summary { background: rgba(255,255,255,0.14); border-radius: 14px; padding: 20px; margin-bottom: 20px; border: 2px solid var(--secondary); backdrop-filter: blur(8px); position: relative; }
-.summary-title { font-family: 'Zen Maru Gothic', sans-serif; font-size: 14px; font-weight: 700; color: var(--secondary); margin-bottom: 12px; }
-.summary-row { display: flex; justify-content: space-between; font-size: 13px; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.12); color: rgba(255,255,255,0.92); }
+.booking-summary { background: var(--bg-card); border-radius: var(--radius-card); padding: 20px; margin-bottom: 20px; border: 1px solid var(--border-gold); }
+.summary-title { font-family: 'Zen Maru Gothic', sans-serif; font-size: 14px; font-weight: 700; color: var(--gold); margin-bottom: 12px; }
+.summary-row { display: flex; justify-content: space-between; font-size: 13px; padding: 6px 0; border-bottom: 1px solid var(--border-subtle); color: var(--text-secondary); }
 .summary-row:last-child { border-bottom: none; }
-.summary-total { display: flex; justify-content: space-between; font-size: 20px; font-weight: 700; color: #fff; padding: 12px 0 0; border-top: 2px solid var(--secondary); margin-top: 8px; }
+.summary-total { display: flex; justify-content: space-between; font-size: 22px; font-weight: 700; color: var(--gold); padding: 12px 0 0; border-top: 1px solid var(--border-gold); margin-top: 8px; font-family: 'Cormorant Garamond', serif; }
 
-.booking-cta { display: block; width: 100%; background: linear-gradient(90deg, var(--secondary), #e7c98a); color: var(--accent); border: none; padding: 16px; border-radius: 30px; font-size: 15px; font-weight: 700; font-family: 'Zen Maru Gothic', sans-serif; letter-spacing: 2px; cursor: pointer; transition: all 0.3s; text-align: center; position: relative; box-shadow: 0 4px 15px rgba(196,166,106,0.4); }
-.booking-cta:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(196,166,106,0.5); }
+.booking-cta { display: block; width: 100%; background: linear-gradient(135deg, var(--accent), var(--accent-light)); color: var(--text-primary); border: none; padding: 16px; border-radius: var(--radius-button); font-size: 15px; font-weight: 700; font-family: 'Zen Maru Gothic', sans-serif; letter-spacing: 2px; cursor: pointer; transition: opacity 0.2s, transform 0.2s; text-align: center; }
+.booking-cta:hover { opacity: 0.92; transform: translateY(-2px); }
+.booking-cta:active { transform: scale(0.99); }
 .booking-cta:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
-.booking-note { text-align: center; font-size: 11px; color: rgba(255,255,255,0.7); margin-top: 16px; line-height: 1.8; position: relative; }
+.booking-note { text-align: center; font-size: 11px; color: var(--text-muted); margin-top: 16px; line-height: 1.8; }
 
-/* Retry button (shown on submit failure) */
-.retry-btn { display: none; width: 100%; margin-top: 12px; background: transparent; color: var(--secondary); border: 2px solid var(--secondary); padding: 12px; border-radius: 30px; font-size: 13px; font-weight: 700; font-family: 'Zen Maru Gothic', sans-serif; cursor: pointer; position: relative; }
+.retry-btn { display: none; width: 100%; margin-top: 12px; background: transparent; color: var(--accent-light); border: 1px solid var(--accent); padding: 12px; border-radius: var(--radius-button); font-size: 13px; font-weight: 700; font-family: 'Zen Maru Gothic', sans-serif; cursor: pointer; }
 .retry-btn.show { display: block; }
-.retry-btn:hover { background: rgba(196,166,106,0.2); }
+.retry-btn:hover { background: var(--accent); color: var(--text-primary); }
 
 /* ===== Policy ===== */
-.policy { background: linear-gradient(135deg, var(--cream-tint), #f6ece2); }
-.policy-table { width: 100%; border-collapse: collapse; font-size: 12px; background: var(--card); border-radius: 10px; overflow: hidden; box-shadow: 0 4px 12px var(--shadow); }
-.policy-table th, .policy-table td { padding: 12px 14px; text-align: left; border-bottom: 1px solid var(--line); }
-.policy-table th { background: linear-gradient(90deg, var(--primary), var(--secondary-dark)); color: #fff; font-weight: 600; }
+.policy { background: var(--bg-secondary); }
+.policy-table { width: 100%; border-collapse: collapse; font-size: 12px; background: var(--bg-card); border-radius: var(--radius-card); overflow: hidden; border: 1px solid var(--border-subtle); }
+.policy-table th, .policy-table td { padding: 12px 14px; text-align: left; border-bottom: 1px solid var(--border-subtle); }
+.policy-table th { background: var(--accent); color: var(--text-primary); font-weight: 600; }
+.policy-table td { color: var(--text-primary); }
 .policy-table tr:last-child td { border-bottom: none; }
-.policy-table tr:hover td { background: var(--cream-tint); }
+.policy-table tr:hover td { background: var(--bg-secondary); }
 
-/* ===== Other programs link ===== */
+/* ===== Other programs ===== */
 .other-programs { text-align: center; padding: 8px 24px 0; }
-.other-programs a { display: inline-flex; align-items: center; gap: 8px; font-family: 'Zen Maru Gothic', sans-serif; font-size: 13px; font-weight: 700; color: var(--primary); text-decoration: none; border: 2px solid var(--secondary); padding: 10px 22px; border-radius: 30px; transition: all 0.25s; }
-.other-programs a:hover { background: var(--secondary); color: #fff; }
+.other-programs a { display: inline-flex; align-items: center; gap: 8px; font-family: 'Zen Maru Gothic', sans-serif; font-size: 13px; font-weight: 700; color: var(--gold); text-decoration: none; border: 1px solid var(--border-gold); padding: 10px 22px; border-radius: var(--radius-button); transition: all 0.25s; }
+.other-programs a:hover { background: var(--gold); color: var(--bg-primary); }
 
 /* ===== Footer ===== */
-.footer { background: linear-gradient(135deg, var(--accent), #2a2018); color: rgba(255,255,255,0.7); padding: 30px 24px; text-align: center; }
-.footer-brand { font-family: 'Zen Maru Gothic', sans-serif; font-size: 18px; background: linear-gradient(90deg, var(--secondary), #e7c98a); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 6px; }
-.footer-info { font-size: 11px; margin-bottom: 4px; }
+.footer { background: var(--bg-primary); color: var(--text-secondary); padding: 28px 24px; text-align: center; border-top: 1px solid var(--border-subtle); }
+.footer-brand { font-family: 'Zen Maru Gothic', sans-serif; font-size: 16px; color: var(--gold); letter-spacing: 2px; margin-bottom: 6px; }
+.footer-info { font-size: 11px; margin-bottom: 4px; color: var(--text-secondary); }
 .footer-links { display: flex; justify-content: center; gap: 16px; margin: 16px 0; flex-wrap: wrap; }
-.footer-links a { font-size: 11px; color: rgba(255,255,255,0.6); text-decoration: none; transition: color 0.3s; padding: 4px 8px; border-radius: 4px; }
-.footer-links a:hover { color: var(--secondary); background: rgba(255,255,255,0.1); }
-.footer-powered { font-size: 10px; margin-top: 16px; color: rgba(255,255,255,0.4); }
+.footer-links a { font-size: 11px; color: var(--text-muted); text-decoration: none; transition: color 0.3s; padding: 4px 8px; border-radius: 4px; }
+.footer-links a:hover { color: var(--gold); }
+.footer-powered { font-size: 9px; margin-top: 8px; color: var(--text-muted); letter-spacing: 1px; }
 
 /* ===== Form Messages ===== */
-.form-message { padding: 12px 16px; border-radius: 10px; font-size: 13px; margin-bottom: 16px; display: none; position: relative; }
-.form-message.success { display: block; background: rgba(74,154,106,0.18); color: #d7f0e0; border: 1px solid rgba(74,154,106,0.5); }
-.form-message.error { display: block; background: rgba(199,92,42,0.2); color: #ffd9c6; border: 1px solid rgba(199,92,42,0.5); }
+.form-message { padding: 12px 16px; border-radius: 10px; font-size: 13px; margin-bottom: 16px; display: none; }
+.form-message.success { display: block; background: var(--emerald-soft); color: #9fe0bf; border: 1px solid var(--emerald); }
+.form-message.error { display: block; background: var(--burgundy-soft); color: #f0aab2; border: 1px solid var(--burgundy); }
 
-/* ===== Print ===== */
+/* ===== Section images ===== */
+.section-image { width: 100%; display: block; border-radius: var(--radius-card); margin-bottom: 16px; object-fit: cover; border: 1px solid var(--border-subtle); }
+.section-image.hero-image { height: 220px; object-position: center; }
+.section-image.feature-image { height: 180px; }
+.section-image.facility-image { height: 200px; }
+.program-photo { width: 100%; display: block; height: 150px; object-fit: cover; }
+
+/* ===== Print（白基調へ反転） ===== */
 @media print {
-  body { background: #fff; }
-  .header, .booking-cta, .retry-btn, .header-cta, .breadcrumb, .other-programs { display: none; }
+  :root {
+    --bg-primary: #ffffff; --bg-secondary: #f8f8f8; --bg-card: #ffffff;
+    --bg-warm: #ffffff;
+    --text-primary: #1a1a1a; --text-secondary: #555555; --text-muted: #888888;
+    --gold: #8a7a50; --gold-light: #8a7a50;
+    --border-subtle: #dddddd; --border-gold: #cccccc;
+    --shadow-card: none;
+    --accent: #8B1A2B; --accent-light: #8B1A2B; --accent-dark: #6B1420;
+  }
+  body.theme-katsurao { --accent: #1B6B4A; --accent-light: #1B6B4A; --accent-dark: #145238; }
+  .header, .header-cta, .breadcrumb, .booking-cta, .retry-btn, .other-programs { display: none; }
   .wrap { max-width: 100%; box-shadow: none; }
-  .booking { background: #f5f1ea; color: var(--ink); }
-  .booking .section-title, .booking-label, .summary-title, .booking-opt-name, .summary-row, .summary-total { color: var(--ink); }
-  .booking .section-sub { color: var(--secondary-dark); }
-  .booking-card, .booking-summary { background: #fff; border-color: var(--line); }
   .course-card, .feature-item, .option-card, .doctor-card, .access-card, .program-card, .faq-item, .policy-table, .booking-card, .booking-summary { break-inside: avoid; }
   .section-title, .hero-title { break-after: avoid; }
 }
