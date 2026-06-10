@@ -33,6 +33,19 @@ const GAS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxtjuYfInAbZt__Fq1
     return out;
   }
 
+  // ---- 月〜木・コース長による日程ルール ----
+  const WD = ['日', '月', '火', '水', '木', '金', '土'];
+  function courseNights(courseName) {
+    const m = /(\d+)\s*泊/.exec(courseName || '');
+    return m ? parseInt(m[1], 10) : 0;
+  }
+  // チェックイン可能曜日（1=月 … 4=木）。滞在が月〜木に収まる範囲。
+  function allowedCheckinDays(nights) {
+    const out = [];
+    for (let d = 1; d <= 4 - nights; d++) out.push(d);
+    return out;
+  }
+
   // 現在の選択から金額を算出
   function calc() {
     const courseEl = $('course');
@@ -47,7 +60,8 @@ const GAS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxtjuYfInAbZt__Fq1
     }
 
     const opts = getSelectedOptions();
-    const optionsTotal = opts.reduce((s, o) => s + o.price, 0); // オプションは1予約あたり
+    const optionsPerPerson = opts.reduce((s, o) => s + o.price, 0); // オプションは1名あたり
+    const optionsTotal = optionsPerPerson * guests; // 人数分を加算
     const total = price * guests + optionsTotal;
 
     return {
@@ -66,6 +80,20 @@ const GAS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxtjuYfInAbZt__Fq1
     if ($('sumGuests')) $('sumGuests').textContent = c.guests + '名';
     if ($('sumOptions')) $('sumOptions').textContent = c.options.length ? c.options.join('、') : 'なし';
     if ($('sumTotal')) $('sumTotal').textContent = yen(c.total);
+    updateDateHint();
+  }
+
+  // 日程ヒント（コースに応じて選べる開始曜日を表示）
+  function updateDateHint() {
+    const hint = $('dateHint');
+    if (!hint) return;
+    const nights = courseNights(calc().courseName);
+    if (!nights) {
+      hint.innerHTML = '※ 施設稼働は毎週<strong>月〜木</strong>。コースを選ぶと開始曜日が決まります。';
+      return;
+    }
+    const days = allowedCheckinDays(nights).map((d) => WD[d] + '曜').join('・');
+    hint.innerHTML = '※ ' + nights + '泊コースのチェックインは <strong>' + days + '</strong> のみ（月〜木の稼働内で完結）。';
   }
   // 他ファイルから呼べるよう公開（インラインonchange互換）
   window.updateSummary = updateSummary;
@@ -74,6 +102,16 @@ const GAS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxtjuYfInAbZt__Fq1
   function validate(data) {
     if (!data.course) return 'コースを選択してください。';
     if (!data.date) return '希望日程を選択してください。';
+    // 月〜木・コース長チェック（滞在が月〜木に収まること）
+    const nights = courseNights(data.course);
+    if (nights > 0) {
+      const dow = new Date(data.date + 'T00:00:00').getDay();
+      const allowed = allowedCheckinDays(nights);
+      if (allowed.indexOf(dow) === -1) {
+        return 'このコース（' + nights + '泊）のチェックインは ' +
+          allowed.map((d) => WD[d] + '曜').join('・') + ' のみです（施設稼働：月〜木）。';
+      }
+    }
     if (!data.name) return 'お名前を入力してください。';
     if (!data.email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(data.email)) return '正しいメールアドレスを入力してください。';
     if (!data.phone) return '電話番号を入力してください。';
@@ -104,6 +142,7 @@ const GAS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxtjuYfInAbZt__Fq1
   const messageEl = $('formMessage');
   const submitBtn = $('submitBtn');
   const retryBtn = $('retryBtn');
+  const origBtnText = submitBtn ? submitBtn.textContent : '予約して決済へ進む';
 
   function showMessage(type, html) {
     if (!messageEl) return;
@@ -112,32 +151,68 @@ const GAS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxtjuYfInAbZt__Fq1
     messageEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
 
+  // Stripe Checkout へ遷移するための隠しフォームPOST（CORS回避のためトップレベル遷移）
+  function redirectToCheckout(payload) {
+    const fields = {
+      action: 'checkout',
+      program: payload.program,
+      course: payload.course,
+      price: payload.price,
+      guests: payload.guests,
+      date: payload.date,
+      options: (payload.options || []).join('、'),
+      optionsTotal: payload.optionsTotal,
+      total: payload.total,
+      name: payload.name,
+      email: payload.email,
+      phone: payload.phone,
+      health: payload.health,
+      note: payload.note,
+      page_url: location.origin + location.pathname,
+    };
+    const f = document.createElement('form');
+    f.method = 'POST';
+    f.action = GAS_ENDPOINT;
+    f.style.display = 'none';
+    Object.keys(fields).forEach((k) => {
+      const i = document.createElement('input');
+      i.type = 'hidden';
+      i.name = k;
+      i.value = fields[k] == null ? '' : String(fields[k]);
+      f.appendChild(i);
+    });
+    document.body.appendChild(f);
+    f.submit();
+  }
+
   async function submit() {
     const payload = buildPayload();
 
     const err = validate(payload);
     if (err) { showMessage('error', err); return; }
 
-    if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = '送信中...'; }
+    if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = '決済ページへ移動中...'; }
     if (retryBtn) retryBtn.classList.remove('show');
 
-    try {
-      if (GAS_ENDPOINT) {
-        // CORSプリフライトを避けるためContent-Type未指定の単純POST
-        await fetch(GAS_ENDPOINT, { method: 'POST', body: JSON.stringify(payload) });
-      } else {
-        await new Promise((r) => setTimeout(r, 1200));
-        console.warn('GAS_ENDPOINT 未設定のためデモモードで動作しています（送信は記録されません）。');
-      }
+    if (GAS_ENDPOINT) {
+      // GAS が Stripe Checkout セッションを作成 → 決済ページへリダイレクト。ここでページ遷移する。
+      showMessage('success', '決済ページ（Stripe）へ移動します…そのままお待ちください。');
+      redirectToCheckout(payload);
+      return;
+    }
 
-      showMessage('success', '✅ 予約リクエストを受け付けました！<br>24時間以内に確認メールをお送りします。');
+    // GAS_ENDPOINT 未設定 = デモモード（決済・送信なし）
+    try {
+      await new Promise((r) => setTimeout(r, 1000));
+      console.warn('GAS_ENDPOINT 未設定のためデモモードで動作しています（決済・送信は行われません）。');
+      showMessage('success', '✅【デモ】ご予約内容を確認しました。<br>本番環境では決済ページへ進みます。');
       form.reset();
       updateSummary();
     } catch (e) {
-      showMessage('error', '⚠️ 送信に失敗しました。通信環境をご確認のうえ、再度お試しください。');
+      showMessage('error', '⚠️ エラーが発生しました。再度お試しください。');
       if (retryBtn) retryBtn.classList.add('show');
     } finally {
-      if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = '予約リクエストを送信'; }
+      if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = origBtnText; }
     }
   }
 
@@ -151,4 +226,11 @@ const GAS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxtjuYfInAbZt__Fq1
 
   // 初期表示
   updateSummary();
+
+  // 決済をキャンセルして戻ってきた場合
+  try {
+    if (/[?&]canceled=1/.test(location.search)) {
+      showMessage('error', '決済をキャンセルしました。内容をご確認のうえ、もう一度お試しください。');
+    }
+  } catch (e) {}
 })();

@@ -28,12 +28,12 @@
   "name": "んだばい × みどりの里せせらぎ荘",
   "description": "福島県葛尾村の滞在型ファスティング・ウェルネスリトリート。温泉、里山の自然、発酵食で心身を整える。",
   "url": "https://hideo-t.github.io/ndabai-fasting/katsurao/",
-  "priceRange": "¥49,000〜¥129,000",
+  "priceRange": "¥58,800〜¥170,520",
   "address": {"@type": "PostalAddress", "addressRegion": "福島県", "addressLocality": "双葉郡葛尾村", "addressCountry": "JP"},
   "makesOffer": [
-    {"@type": "Offer", "name": "1泊2日コース", "price": "49000", "priceCurrency": "JPY"},
-    {"@type": "Offer", "name": "2泊3日コース", "price": "89000", "priceCurrency": "JPY"},
-    {"@type": "Offer", "name": "3泊4日コース", "price": "129000", "priceCurrency": "JPY"}
+    {"@type": "Offer", "name": "1泊2日コース", "price": "58800", "priceCurrency": "JPY"},
+    {"@type": "Offer", "name": "2泊3日コース", "price": "114660", "priceCurrency": "JPY"},
+    {"@type": "Offer", "name": "3泊4日コース", "price": "170520", "priceCurrency": "JPY"}
   ]
 }
 </script>
@@ -95,20 +95,20 @@
   <div class="section-sub">PROGRAMS</div>
 
   <div class="course-card">
-    <div class="course-header"><div class="course-name">1泊2日コース</div><div class="course-price">¥49,000<small>〜</small></div></div>
+    <div class="course-header"><div class="course-name">1泊2日コース</div><div class="course-price">¥58,800<small>／人</small></div></div>
     <div class="course-detail">初めての方におすすめ。里山の静けさで体を整える</div>
     <div class="course-includes"><span class="course-include">宿泊</span><span class="course-include">温泉</span><span class="course-include">ファスティング液</span><span class="course-include">回復食</span></div>
   </div>
 
   <div class="course-card">
-    <div class="course-header"><div class="course-name">2泊3日コース</div><div class="course-price">¥89,000<small>〜</small></div></div>
+    <div class="course-header"><div class="course-name">2泊3日コース</div><div class="course-price">¥114,660<small>／人</small></div></div>
     <div class="course-detail">身体の変化を実感。ヨガ・呼吸調整で心身を整える</div>
     <div class="course-includes"><span class="course-include">上記全て</span><span class="course-include">ファスティング液追加</span><span class="course-include">ヨガ1回</span></div>
   </div>
 
   <div class="course-card featured">
     <span class="course-ribbon">おすすめ</span>
-    <div class="course-header"><div class="course-name">3泊4日コース</div><div class="course-price">¥129,000<small>〜</small></div></div>
+    <div class="course-header"><div class="course-name">3泊4日コース</div><div class="course-price">¥170,520<small>／人</small></div></div>
     <div class="course-detail">心身を深く整える。トリートメント付き</div>
     <div class="course-includes"><span class="course-include">上記全て</span><span class="course-include">トリートメント1回</span></div>
   </div>
@@ -157,12 +157,9 @@
   <h2 class="section-title">オプション</h2>
   <div class="section-sub">OPTIONS</div>
   <div class="option-grid">
-    <div class="option-card"><div class="option-icon">💆</div><div class="option-name">リンパマッサージ</div><div class="option-price">¥15,000/回</div><div class="option-desc">60分・完全個別</div></div>
-    <div class="option-card"><div class="option-icon">🎵</div><div class="option-name">音楽療法</div><div class="option-price">¥8,000/回</div><div class="option-desc">橋本妙子による声楽</div></div>
-    <div class="option-card"><div class="option-icon">🌸</div><div class="option-name">アロマセラピー</div><div class="option-price">¥10,000/回</div><div class="option-desc">天然精油使用</div></div>
-    <div class="option-card"><div class="option-icon">🧘</div><div class="option-name">ヨガ</div><div class="option-price">¥5,000/回</div><div class="option-desc">プロインストラクター</div></div>
+    <div class="option-card"><div class="option-icon">💆</div><div class="option-name">オイルマッサージ</div><div class="option-price">¥10,000／人</div><div class="option-desc">1名あたり・任意オプション</div></div>
   </div>
-  <p class="lead" style="margin-top:14px;text-align:center;font-size:12px;"><span class="muted">※ 送迎は葛尾村へのアクセスに応じて別途ご相談ください。</span></p>
+  <p class="lead" style="margin-top:14px;text-align:center;font-size:12px;"><span class="muted">※ 音楽療法・アロマ・ヨガ・回復食などのケアは<strong>標準で付属</strong>します。送迎は別途ご相談。</span></p>
 </section>
 
 <!-- 実施体制 -->
@@ -197,16 +194,18 @@
   <div id="formMessage" class="form-message"></div>
 
   <form id="bookingForm">
-    <input type="hidden" name="program" value="katsurao">
+    <input type="hidden" name="program" value="omakase">
+    <div class="booking-note">※ 宿泊施設（田村市・葛尾村）は空き状況・内容に応じて<strong>運営側で最適化</strong>してご案内します。</div>
 
     <div class="booking-card">
       <label class="booking-label" for="course">コースを選択 *</label>
       <select class="booking-select" id="course" required>
         <option value="">選択してください</option>
-        <option value="1泊2日|49000">1泊2日コース ── ¥49,000</option>
-        <option value="2泊3日|89000">2泊3日コース ── ¥89,000</option>
-        <option value="3泊4日|129000">3泊4日コース ── ¥129,000</option>
+        <option value="1泊2日|58800">1泊2日コース ── ¥58,800／人</option>
+        <option value="2泊3日|114660">2泊3日コース ── ¥114,660／人（2泊目以降5%off）</option>
+        <option value="3泊4日|170520">3泊4日コース ── ¥170,520／人（2泊目以降5%off）</option>
       </select>
+      <div class="booking-note">※ 3泊4日を超えるご滞在は <a href="mailto:info@ndanda.net">info@ndanda.net</a> へご相談ください。</div>
 
       <label class="booking-label" for="guests">参加人数 *</label>
       <select class="booking-select" id="guests" required>
@@ -218,36 +217,19 @@
         <option value="6">6名</option>
       </select>
 
-      <label class="booking-label" for="date">希望日程 *</label>
+      <label class="booking-label" for="date">希望日（チェックイン）*</label>
       <input type="date" class="booking-input" id="date" required>
+      <div class="booking-note" id="dateHint">※ 施設稼働は毎週<strong>月〜木</strong>。コースを選ぶと開始曜日が決まります。</div>
     </div>
 
     <div class="booking-card">
-      <label class="booking-label">オプション（任意）</label>
+      <label class="booking-label">オプション（任意・1名あたり）</label>
       <div class="booking-options">
         <label class="booking-opt">
-          <input type="checkbox" name="options" value="リンパマッサージ|15000">
+          <input type="checkbox" name="options" value="オイルマッサージ|10000">
           <div class="booking-check"></div>
-          <div class="booking-opt-info"><div class="booking-opt-name">リンパマッサージ（60分）</div><div class="booking-opt-desc">完全個別</div></div>
-          <div class="booking-opt-price">¥15,000</div>
-        </label>
-        <label class="booking-opt">
-          <input type="checkbox" name="options" value="音楽療法|8000">
-          <div class="booking-check"></div>
-          <div class="booking-opt-info"><div class="booking-opt-name">音楽療法</div><div class="booking-opt-desc">橋本妙子による声楽セッション</div></div>
-          <div class="booking-opt-price">¥8,000</div>
-        </label>
-        <label class="booking-opt">
-          <input type="checkbox" name="options" value="アロマセラピー|10000">
-          <div class="booking-check"></div>
-          <div class="booking-opt-info"><div class="booking-opt-name">アロマセラピー</div><div class="booking-opt-desc">天然精油を使用</div></div>
-          <div class="booking-opt-price">¥10,000</div>
-        </label>
-        <label class="booking-opt">
-          <input type="checkbox" name="options" value="ヨガ|5000">
-          <div class="booking-check"></div>
-          <div class="booking-opt-info"><div class="booking-opt-name">ヨガ（朝）</div><div class="booking-opt-desc">プロインストラクター</div></div>
-          <div class="booking-opt-price">¥5,000</div>
+          <div class="booking-opt-info"><div class="booking-opt-name">オイルマッサージ</div><div class="booking-opt-desc">1名あたり／その他のケアは標準で付属</div></div>
+          <div class="booking-opt-price">¥10,000／人</div>
         </label>
       </div>
     </div>
@@ -273,12 +255,12 @@
       <div class="summary-total"><span>合計（税込）</span><span id="sumTotal">¥0</span></div>
     </div>
 
-    <button type="submit" class="booking-cta" id="submitBtn">予約リクエストを送信</button>
+    <button type="submit" class="booking-cta" id="submitBtn">予約して決済へ進む</button>
     <button type="button" class="retry-btn" id="retryBtn">もう一度送信する</button>
 
     <div class="booking-note">
-      ※ 予約リクエスト後、24時間以内に確認メールをお送りします<br>
-      ※ 空き状況により、日程調整をお願いする場合があります
+      ※ ご予約はカード決済（Stripe）で確定します<br>
+      ※ 施設稼働は毎週月〜木。空き状況により日程調整をお願いする場合があります
     </div>
   </form>
 </section>
@@ -331,6 +313,6 @@
 
 </div>
 
-<script src="../shared/booking.js?v=2"></script>
+<script src="../shared/booking.js?v=3"></script>
 </body>
 </html>
